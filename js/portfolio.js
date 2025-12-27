@@ -106,4 +106,38 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // 5. Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+
+    // Check for saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        html.setAttribute('data-theme', savedTheme);
+        if (savedTheme === 'light' && themeIcon) {
+            themeIcon.classList.remove('ri-moon-line');
+            themeIcon.classList.add('ri-sun-line');
+        }
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            // Toggle Icon
+            if (newTheme === 'light') {
+                themeIcon.classList.remove('ri-moon-line');
+                themeIcon.classList.add('ri-sun-line');
+            } else {
+                themeIcon.classList.remove('ri-sun-line');
+                themeIcon.classList.add('ri-moon-line');
+            }
+        });
+    }
 });
