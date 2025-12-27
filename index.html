@@ -111,41 +111,38 @@
                     </div>
                 </div>
 
-                <!-- Project 2: Placeholder -->
-                <div class="project-card">
-                    <div class="card-image ecommerce">
-                        <i class="ri-shopping-bag-3-line" style="font-size: 4rem; color: rgba(255,255,255,0.2);"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Nexus Commerce</h3>
-                        <p>A headless e-commerce dashboard prototype focusing on analytics visualization and inventory
-                            management.</p>
-                        <div class="card-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Tailwind</span>
-                            <span class="tag">Chart.js</span>
-                        </div>
-                        <a href="#" class="card-link" style="opacity:0.5; cursor:not-allowed;">Coming Soon</a>
-                    </div>
-                </div>
+            </div>
+        </section>
 
-                <!-- Project 3: Placeholder -->
-                <div class="project-card">
-                    <div class="card-image ai">
-                        <i class="ri-openai-line" style="font-size: 4rem; color: rgba(255,255,255,0.2);"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Neurax Chat</h3>
-                        <p>AI-powered conversational interface redesign with support for voice input and context-aware
-                            suggestions.</p>
-                        <div class="card-tags">
-                            <span class="tag">Next.js</span>
-                            <span class="tag">OpenAI API</span>
-                            <span class="tag">WebSockets</span>
-                        </div>
-                        <a href="#" class="card-link" style="opacity:0.5; cursor:not-allowed;">Coming Soon</a>
-                    </div>
-                </div>
+        <!-- Writing Section -->
+        <section id="writing" class="reveal">
+            <div class="section-header">
+                <h2 class="section-title"><i class="ri-quill-pen-line"></i> Writing</h2>
+                <p class="section-subtitle">Thoughts on engineering, design, and user experience.</p>
+            </div>
+
+            <div class="writing-grid">
+                <a href="#" class="writing-card">
+                    <span class="writing-date">Dec 28, 2024</span>
+                    <h3>The Future of Fluid Interfaces</h3>
+                    <p>Why micro-interactions are the secret to building products that feel alive.</p>
+                    <div class="writing-link">Read Article <i class="ri-arrow-right-line"></i></div>
+                </a>
+
+                <a href="#" class="writing-card">
+                    <span class="writing-date">Nov 15, 2024</span>
+                    <h3>Building PratikOS</h3>
+                    <p>A technical deep-dive into creating a browser-based operating system simulation.</p>
+                    <div class="writing-link">Read Article <i class="ri-arrow-right-line"></i></div>
+                </a>
+
+                <a href="#" class="writing-card">
+                    <span class="writing-date">Oct 02, 2024</span>
+                    <h3>The Art of Digital Minimalism</h3>
+                    <p>How removing features can sometimes add more value to your software.</p>
+                    <div class="writing-link">Read Article <i class="ri-arrow-right-line"></i></div>
+                </a>
+            </div>
             </div>
         </section>
 
@@ -176,10 +173,38 @@
         </section>
 
         <!-- Contact -->
+        <!-- Contact -->
         <section id="contact" class="contact-section reveal">
-            <h2 style="justify-content: center; font-size: 2.5rem; margin-bottom: 1rem;">Let's work together.</h2>
-            <p style="margin-bottom: 3rem;">Have a project in mind? I'd love to hear about it.</p>
-            <a href="mailto:pratikk5143772@gmail.com" class="big-link">pratikk5143772@gmail.com</a>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2 class="section-title">Let's work together.</h2>
+                    <p>Have a project in mind? I'd love to hear about it. Send me a message and I'll get back to you as
+                        soon as possible.</p>
+
+                    <div class="contact-methods">
+                        <a href="mailto:pratikk5143772@gmail.com" class="contact-method">
+                            <i class="ri-mail-send-line"></i>
+                            <span>pratikk5143772@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
+
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button" style="width: 100%; border: none; cursor: pointer;">
+                        Send Message <i class="ri-send-plane-fill"></i>
+                    </button>
+                    <p class="form-status" id="form-status"></p>
+                </form>
+            </div>
         </section>
     </main>
 

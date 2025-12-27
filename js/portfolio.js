@@ -140,4 +140,41 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // 6. Contact Form Handler
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const btn = contactForm.querySelector('button');
+            const originalText = btn.innerHTML;
+            const statusMsg = document.getElementById('form-status');
+
+            // Loading State
+            btn.innerHTML = 'Sending... <i class="ri-loader-4-line ri-spin"></i>';
+            btn.style.opacity = '0.7';
+            btn.disabled = true;
+
+            // Simulate Network Request
+            setTimeout(() => {
+                btn.innerHTML = 'Message Sent! <i class="ri-check-line"></i>';
+                btn.style.backgroundColor = '#10b981';
+                btn.style.opacity = '1';
+
+                statusMsg.textContent = "Thanks for reaching out! I'll get back to you shortly.";
+                statusMsg.className = 'form-status success';
+
+                contactForm.reset();
+
+                // Reset Button after 3 seconds
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.backgroundColor = '';
+                    btn.disabled = false;
+                    statusMsg.textContent = '';
+                }, 3000);
+            }, 1500);
+        });
+    }
 });
