@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    });
 
     // 4. Mobile Menu Toggle
     const menuBtn = document.querySelector('.mobile-menu-btn');
@@ -82,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuBtn && navLinks) {
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            
+
             // Toggle icon
             const icon = menuBtn.querySelector('i');
             if (navLinks.classList.contains('active')) {
