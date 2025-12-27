@@ -223,6 +223,20 @@ h1 {
   margin-top: 1rem;
 }
 
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 .tech-badge {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -234,12 +248,18 @@ h1 {
   font-size: 0.9rem;
   color: var(--text-secondary);
   transition: all 0.3s;
+  animation: float 4s ease-in-out infinite;
+}
+
+.tech-badge:nth-child(odd) {
+  animation-duration: 5s;
 }
 
 .tech-badge:hover {
   border-color: var(--accent-primary);
   color: var(--text-primary);
-  transform: translateY(-3px);
+  transform: translateY(-5px) scale(1.05);
+  animation-play-state: paused;
 }
 
 /* --- SECTIONS --- */

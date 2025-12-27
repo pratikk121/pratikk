@@ -63,7 +63,7 @@ export default function Navbar() {
                         {theme === 'dark' ? <i className="ri-moon-line"></i> : <i className="ri-sun-line"></i>}
                     </button>
 
-                    <Link href="mailto:pratikk5143772@gmail.com" className="cta-button desktop-only">
+                    <Link href="#contact" className="cta-button desktop-only">
                         Let's Talk <i className="ri-arrow-right-line"></i>
                     </Link>
                 </div>

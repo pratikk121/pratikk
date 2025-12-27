@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   keywords: ['Software Engineer', 'Web Developer', 'Portfolio', 'Next.js'],
 };
 
+import ParticleBackground from "@/components/ParticleBackground";
+
 export default function RootLayout({
   children,
 }: {
@@ -21,6 +23,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body>
         <div className="bg-mesh"></div>
+        <ParticleBackground />
         {children}
       </body>
     </html>
