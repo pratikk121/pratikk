@@ -1,0 +1,80 @@
+/* --- BOOT SCREEN --- */
+#boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    /* Deep black start */
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-direction: column;
+    transition: opacity 1s ease-in-out;
+}
+
+.boot-content {
+    text-align: center;
+    width: 300px;
+}
+
+.os-logo {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: pulseLogo 2s infinite ease-in-out;
+}
+
+.boot-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.boot-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.boot-bar {
+    height: 100%;
+    width: 0%;
+    background: #fff;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.boot-status {
+    font-family: 'Consolas', monospace;
+    font-size: 0.8rem;
+    color: #888;
+    height: 20px;
+    /* Prevent jump */
+}
+
+@keyframes pulseLogo {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}

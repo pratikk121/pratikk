@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratik Kadole | Software Engineer</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-primary: #6366f1;
+            --accent-secondary: #ec4899;
+            --card-bg: rgba(30, 41, 59, 0.5);
+            --border-color: rgba(148, 163, 184, 0.1);
+            --gradient-text: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Mesh */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.15) 0%, transparent 25%);
+            filter: blur(40px);
+            animation: pulseBg 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseBg {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .icon-link {
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .icon-link:hover {
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+        }
+
+        .gradient-text {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .tech-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .tech-badge:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 6rem;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        h2 i {
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Sandbox Card */
+        .sandbox-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sandbox-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-text);
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .sandbox-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .sandbox-card:hover::before {
+            opacity: 1;
+        }
+
+        .sandbox-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .sandbox-icon {
+            font-size: 2rem;
+            color: var(--accent-secondary);
+        }
+
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: gap 0.2s;
+        }
+
+        .action-link:hover {
+            gap: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 0 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-mesh"></div>
+
+    <div class="container">
+        <header>
+            <a href="#" class="logo">pk.</a>
+            <nav class="nav-links">
+                <a href="https://github.com/pratikk121" class="icon-link" aria-label="GitHub"><i
+                        class="ri-github-line"></i></a>
+                <a href="#" class="icon-link" aria-label="LinkedIn"><i class="ri-linkedin-line"></i></a>
+                <a href="mailto:pratikk5143772@gmail.com" class="icon-link" aria-label="Email"><i
+                        class="ri-mail-send-line"></i></a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="hero">
+                <h1>Building the <span class="gradient-text">future</span> of web interfaces.</h1>
+                <p class="subtitle">I'm Pratik, a software engineer obsessed with fluid interactions and pixel-perfect
+                    design.</p>
+
+                <div class="tech-stack">
+                    <div class="tech-badge"><i class="ri-reactjs-line"></i> React</div>
+                    <div class="tech-badge"><i class="ri-javascript-line"></i> JavaScript</div>
+                    <div class="tech-badge"><i class="ri-database-2-line"></i> Supabase</div>
+                    <div class="tech-badge"><i class="ri-css3-line"></i> CSS3</div>
+                    <div class="tech-badge"><i class="ri-git-branch-line"></i> Git</div>
+                </div>
+            </div>
+
+            <section id="sandbox">
+                <h2><i class="ri-flask-line"></i> Interactive Lab</h2>
+                <p>Explore my experimental web-based operating system. A fully functional desktop environment built with
+                    vanilla JS and glassmorphism principles.</p>
+
+                <div class="sandbox-card">
+                    <div class="sandbox-header">
+                        <i class="ri-macbook-line sandbox-icon"></i>
+                        <h3 style="font-size: 1.5rem; font-family: 'Outfit';">PratikOS v1.0</h3>
+                    </div>
+                    <p style="margin-bottom: 0;">Features window management, simulated file system, music player, and
+                        cloud-synced widgets.</p>
+                    <a href="sandbox/pratikOS/index.html" class="action-link">
+                        Launch Experience <i class="ri-arrow-right-line"></i>
+                    </a>
+                </div>
+            </section>
+
+            <section id="about">
+                <h2><i class="ri-user-smile-line"></i> About Me</h2>
+                <p>
+                    I specialize in building accessible, high-performance web applications. My passion lies in bridging
+                    the gap between design and engineering, creating tools that are not just functional but delightful
+                    to use.
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://github.com/pratikk121" class="icon-link"><i class="ri-github-fill"></i></a>
+                <a href="#" class="icon-link"><i class="ri-linkedin-fill"></i></a>
+                <a href="#" class="icon-link"><i class="ri-twitter-x-fill"></i></a>
+            </div>
+            <p>&copy; 2024 Pratik Kadole. Built with <i class="ri-heart-3-fill"
+                    style="color: var(--accent-secondary);"></i> and Code.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
