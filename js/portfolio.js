@@ -72,4 +72,39 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    });
+
+    // 4. Mobile Menu Toggle
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Toggle icon
+            const icon = menuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('ri-menu-line');
+                icon.classList.add('ri-close-line');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                icon.classList.remove('ri-close-line');
+                icon.classList.add('ri-menu-line');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close menu when clicking a link
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuBtn.querySelector('i');
+                icon.classList.remove('ri-close-line');
+                icon.classList.add('ri-menu-line');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    }
 });
