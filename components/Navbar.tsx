@@ -49,7 +49,7 @@ export default function Navbar() {
 
                     {/* Mobile CTA (visible in menu) */}
                     <div className="mobile-only" style={{ marginTop: '1rem', display: isMenuOpen ? 'block' : 'none' }}>
-                        <Link href="mailto:pratikk5143772@gmail.com" className="cta-button">Let's Talk</Link>
+                        <Link href="#contact" className="cta-button">Let's Talk</Link>
                     </div>
                 </nav>
 
