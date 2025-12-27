@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/sandbox/InvenQrise",
+            "destination": "https://inven-qrise.vercel.app/"
+        },
+        {
+            "source": "/sandbox/InvenQrise/:path*",
+            "destination": "https://inven-qrise.vercel.app/:path*"
+        }
+    ]
+}
