@@ -1,9 +1,11 @@
+import Typewriter from "./Typewriter";
+
 export default function Hero() {
     return (
         <section className="hero reveal active">
             <h1>
                 Building the future of <br />
-                <span className="txt-gradient" id="typewriter">digital experiences.</span>
+                <Typewriter />
             </h1>
             <p>
                 I'm Pratik, a software engineer obsessed with fluid interactions, pixel-perfect design, and robust engineering.
