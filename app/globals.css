@@ -629,3 +629,14 @@ footer {
     transform: translate(-50%, -50%) scale(1);
   }
 }
+
+/* --- HIDE LIVEBLOCKS BRANDING --- */
+a[href*="liveblocks.io"],
+[class*="liveblocks-badge"],
+[id*="liveblocks-badge"],
+iframe[src*="liveblocks"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
