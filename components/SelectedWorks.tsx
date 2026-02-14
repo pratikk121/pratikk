@@ -23,9 +23,9 @@ export default function SelectedWorks() {
                             <span className="tag">Supabase</span>
                         </div>
                         {/* Note: Linking to static subproject in public/sandbox */}
-                        <a href="/sandbox/pratikOS/index.html" className="card-link" target="_blank">
-                            Launch Experience <i className="ri-external-link-line"></i>
-                        </a>
+                        <Link href="/work/pratik-os" className="card-link">
+                            View Case Study <i className="ri-arrow-right-line"></i>
+                        </Link>
                     </div>
                 </div>
             </div>
