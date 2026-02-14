@@ -16,6 +16,10 @@
   --foreground: #f8fafc;
 }
 
+.font-outfit {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+}
+
 [data-theme="light"] {
   --bg-dark: #f8fafc;
   --text-primary: #0f172a;

@@ -14,6 +14,8 @@ export const metadata: Metadata = {
 
 import ParticleBackground from "@/components/ParticleBackground";
 
+import Providers from "@/components/Providers";
+
 export default function RootLayout({
   children,
 }: {
@@ -24,7 +26,7 @@ export default function RootLayout({
       <body>
         <div className="bg-mesh"></div>
         <ParticleBackground />
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
