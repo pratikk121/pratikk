@@ -16,6 +16,9 @@ import ParticleBackground from "@/components/ParticleBackground";
 import Providers from "@/components/Providers";
 import CommandPalette from "@/components/CommandPalette";
 
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
 export default function RootLayout({
   children,
 }: {
@@ -27,7 +30,9 @@ export default function RootLayout({
         <div className="bg-mesh"></div>
         <ParticleBackground />
         <CommandPalette />
+        <Navbar />
         <Providers>{children}</Providers>
+        <Footer />
       </body>
     </html>
   );
