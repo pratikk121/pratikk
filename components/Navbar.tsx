@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import MagneticButton from './MagneticButton';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,7 +50,7 @@ export default function Navbar() {
 
                     {/* Mobile CTA (visible in menu) */}
                     <div className="mobile-only" style={{ marginTop: '1rem', display: isMenuOpen ? 'block' : 'none' }}>
-                        <Link href="#contact" className="cta-button">Let's Talk</Link>
+                        <MagneticButton href="#contact" className="cta-button">Let's Talk</MagneticButton>
                     </div>
                 </nav>
 
@@ -63,9 +64,11 @@ export default function Navbar() {
                         {theme === 'dark' ? <i className="ri-moon-line"></i> : <i className="ri-sun-line"></i>}
                     </button>
 
-                    <Link href="#contact" className="cta-button desktop-only">
-                        Let's Talk <i className="ri-arrow-right-line"></i>
-                    </Link>
+                    <div className="desktop-only">
+                        <MagneticButton href="#contact" className="cta-button">
+                            Let's Talk <i className="ri-arrow-right-line"></i>
+                        </MagneticButton>
+                    </div>
                 </div>
             </div>
         </header>
