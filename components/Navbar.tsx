@@ -44,13 +44,13 @@ export default function Navbar() {
                 </div>
 
                 <nav className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-                    <Link href="#about" className="nav-item" onClick={() => setIsMenuOpen(false)}>About</Link>
-                    <Link href="#projects" className="nav-item" onClick={() => setIsMenuOpen(false)}>Work</Link>
-                    <Link href="#contact" className="nav-item" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+                    <Link href="/about" className="nav-item" onClick={() => setIsMenuOpen(false)}>About</Link>
+                    <Link href="/work" className="nav-item" onClick={() => setIsMenuOpen(false)}>Work</Link>
+                    <Link href="/contact" className="nav-item" onClick={() => setIsMenuOpen(false)}>Contact</Link>
 
                     {/* Mobile CTA (visible in menu) */}
                     <div className="mobile-only" style={{ marginTop: '1rem', display: isMenuOpen ? 'block' : 'none' }}>
-                        <MagneticButton href="#contact" className="cta-button">Let's Talk</MagneticButton>
+                        <MagneticButton href="/contact" className="cta-button">Let's Talk</MagneticButton>
                     </div>
                 </nav>
 
@@ -65,7 +65,7 @@ export default function Navbar() {
                     </button>
 
                     <div className="desktop-only">
-                        <MagneticButton href="#contact" className="cta-button">
+                        <MagneticButton href="/contact" className="cta-button">
                             Let's Talk <i className="ri-arrow-right-line"></i>
                         </MagneticButton>
                     </div>

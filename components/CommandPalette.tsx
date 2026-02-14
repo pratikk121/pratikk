@@ -50,21 +50,21 @@ export default function CommandPalette() {
                         <span>Home</span>
                     </Command.Item>
                     <Command.Item
-                        onSelect={() => runCommand(() => router.push("/#about"))}
+                        onSelect={() => runCommand(() => router.push("/about"))}
                         className="flex items-center gap-2 p-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer transition-colors"
                     >
                         <i className="ri-user-line text-lg"></i>
                         <span>About</span>
                     </Command.Item>
                     <Command.Item
-                        onSelect={() => runCommand(() => router.push("/#projects"))}
+                        onSelect={() => runCommand(() => router.push("/work"))}
                         className="flex items-center gap-2 p-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer transition-colors"
                     >
                         <i className="ri-code-box-line text-lg"></i>
                         <span>Projects</span>
                     </Command.Item>
                     <Command.Item
-                        onSelect={() => runCommand(() => router.push("/#contact"))}
+                        onSelect={() => runCommand(() => router.push("/contact"))}
                         className="flex items-center gap-2 p-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white cursor-pointer transition-colors"
                     >
                         <i className="ri-mail-line text-lg"></i>

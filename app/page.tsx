@@ -16,8 +16,6 @@ export default function Home() {
         <Hero />
         <SelectedWorks />
         <Writing />
-        <About />
-        <Contact />
       </main>
       <Footer />
     </>
