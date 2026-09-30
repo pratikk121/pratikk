@@ -107,7 +107,7 @@ export default function CommandPalette() {
             </Command.List>
 
             <div className="border-t border-slate-700/50 mt-2 pt-2 px-2 flex justify-between items-center text-xs text-slate-500">
-                <span>Pratik's Portfolio</span>
+                <span>Pratik&apos;s Portfolio</span>
                 <div className="flex gap-1">
                     <span className="bg-slate-800 px-1 rounded">esc</span>
                     <span>to close</span>

@@ -11,8 +11,12 @@ export default function Navbar() {
     // Initialize theme from localStorage on mount
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme') || 'dark';
-        setTheme(savedTheme);
         document.documentElement.setAttribute('data-theme', savedTheme);
+        if (savedTheme !== 'dark') {
+            requestAnimationFrame(() => {
+                setTheme(savedTheme);
+            });
+        }
     }, []);
 
     const toggleTheme = () => {
@@ -50,7 +54,7 @@ export default function Navbar() {
 
                     {/* Mobile CTA (visible in menu) */}
                     <div className="mobile-only" style={{ marginTop: '1rem', display: isMenuOpen ? 'block' : 'none' }}>
-                        <MagneticButton href="/contact" className="cta-button">Let's Talk</MagneticButton>
+                        <MagneticButton href="/contact" className="cta-button">Let&apos;s Talk</MagneticButton>
                     </div>
                 </nav>
 
@@ -66,7 +70,7 @@ export default function Navbar() {
 
                     <div className="desktop-only">
                         <MagneticButton href="/contact" className="cta-button">
-                            Let's Talk <i className="ri-arrow-right-line"></i>
+                            Let&apos;s Talk <i className="ri-arrow-right-line"></i>
                         </MagneticButton>
                     </div>
                 </div>

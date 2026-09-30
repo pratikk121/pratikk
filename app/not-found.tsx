@@ -17,7 +17,7 @@ export default function NotFound() {
             if (i > fullText.length) clearInterval(interval);
         }, 30);
         return () => clearInterval(interval);
-    }, [pathname]);
+    }, [fullText]);
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden z-10 px-4 text-center">

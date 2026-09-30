@@ -31,7 +31,7 @@ export default function Contact() {
             } else {
                 setStatus('error');
             }
-        } catch (error) {
+        } catch {
             setStatus('error');
         }
     };
@@ -40,8 +40,8 @@ export default function Contact() {
         <section id="contact" className="contact-section reveal active">
             <div className="contact-container">
                 <div className="contact-info">
-                    <h2 className="section-title">Let's work together.</h2>
-                    <p>Have a project in mind? I'd love to hear about it. Send me a message and I'll get back to you as soon as possible.</p>
+                    <h2 className="section-title">Let&apos;s work together.</h2>
+                    <p>Have a project in mind? I&apos;d love to hear about it. Send me a message and I&apos;ll get back to you as soon as possible.</p>
                     <div className="contact-methods">
                         <a href="mailto:pratikk5143772@gmail.com" className="contact-method">
                             <i className="ri-mail-send-line"></i>

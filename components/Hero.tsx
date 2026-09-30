@@ -8,7 +8,7 @@ export default function Hero() {
                 <Typewriter />
             </h1>
             <p>
-                I'm Pratik, a software engineer obsessed with fluid interactions, pixel-perfect design, and robust engineering.
+                I&apos;m Pratik, a software engineer obsessed with fluid interactions, pixel-perfect design, and robust engineering.
             </p>
 
             <div className="tech-stack">

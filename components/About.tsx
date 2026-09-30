@@ -8,7 +8,7 @@ export default function About() {
                 <p>
                     I specialize in bridging the gap between design and engineering. My philosophy is simple: tools
                     should be not just functional, but delightful to use.
-                    I'm currently focused on building accessible, high-performance web applications using modern web
+                    I&apos;m currently focused on building accessible, high-performance web applications using modern web
                     technologies.
                 </p>
                 <div style={{ display: 'flex', gap: '2rem', marginTop: '2rem' }}>

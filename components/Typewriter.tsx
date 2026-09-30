@@ -11,7 +11,6 @@ const phrases = [
 
 export default function Typewriter() {
     const [text, setText] = useState('');
-    const [phraseIndex, setPhraseIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);
     const [typingSpeed, setTypingSpeed] = useState(150);

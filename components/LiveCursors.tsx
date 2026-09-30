@@ -3,13 +3,8 @@
 import { useMyPresence, useOthers } from "@liveblocks/react";
 import { useEffect } from "react";
 
-// Initial presence
-type Presence = {
-    cursor: { x: number; y: number } | null;
-};
-
-export default function LiveCursors() {
-    const [myPresence, updateMyPresence] = useMyPresence();
+function LiveCursorsInner() {
+    const [, updateMyPresence] = useMyPresence();
     const others = useOthers();
 
     useEffect(() => {
@@ -75,4 +70,11 @@ export default function LiveCursors() {
             })}
         </>
     );
+}
+
+export default function LiveCursors() {
+    if (!process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY) {
+        return null;
+    }
+    return <LiveCursorsInner />;
 }

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { projects } from "@/data/projects";
 import Link from "next/link";
+import type { Metadata } from "next";
 
 interface PageProps {
     params: Promise<{
@@ -14,67 +15,230 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function ProjectPage({
+export async function generateMetadata({
     params,
-}: PageProps) {
+}: PageProps): Promise<Metadata> {
     const { slug } = await params;
     const project = projects.find((p) => p.slug === slug);
 
     if (!project) {
+        return {
+            title: "Project Not Found",
+            description: "The requested architectural case study could not be found.",
+        };
+    }
+
+    const title = `${project.title} | Case Study`;
+    const description = project.description;
+
+    return {
+        title,
+        description,
+        keywords: [
+            project.title,
+            project.category,
+            ...project.tags,
+            "Pratik Kadole",
+            "Systems Architecture",
+            "Full Stack Engineering",
+            "Case Study",
+        ],
+        openGraph: {
+            title: `${project.title} - Engineering Case Study`,
+            description,
+            type: "article",
+            url: `https://pratikkadole.dev/work/${project.slug}`,
+            siteName: "Pratik Kadole Portfolio",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `${project.title} - Engineering Case Study`,
+            description,
+            creator: "@pratikkadole",
+        },
+        alternates: {
+            canonical: `/work/${project.slug}`,
+        },
+    };
+}
+
+export default async function ProjectPage({ params }: PageProps) {
+    const { slug } = await params;
+    const currentIndex = projects.findIndex((p) => p.slug === slug);
+
+    if (currentIndex === -1) {
         notFound();
     }
 
+    const project = projects[currentIndex];
+    const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : projects[projects.length - 1];
+    const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : projects[0];
+
+    const getCategoryBadgeStyles = (category: typeof project.category) => {
+        switch (category) {
+            case "Systems & OS":
+                return "bg-cyan-500/10 text-cyan-300 border-cyan-500/30";
+            case "Fintech & AI":
+                return "bg-emerald-500/10 text-emerald-300 border-emerald-500/30";
+            case "Commercial & CRM":
+                return "bg-indigo-500/10 text-indigo-300 border-indigo-500/30";
+            default:
+                return "bg-white/10 text-slate-300 border-white/20";
+        }
+    };
+
     return (
-        <main className="pt-32 px-6 max-w-[1000px] mx-auto min-h-screen">
-            <Link href="/work" className="inline-flex items-center text-slate-400 hover:text-white mb-8 transition-colors">
-                <i className="ri-arrow-left-line mr-2"></i> Back to Work
-            </Link>
+        <main className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-8 max-w-[1040px] mx-auto">
+            {/* Sticky Navigation Subheader */}
+            <div className="sticky top-20 z-40 mb-8 -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 bg-slate-950/80 backdrop-blur-xl border-y border-white/[0.08] flex items-center justify-between gap-4 transition-all">
+                <Link
+                    href="/work"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors group"
+                >
+                    <i className="ri-arrow-left-line text-base transform transition-transform group-hover:-translate-x-1"></i>
+                    <span>Back to Portfolio</span>
+                </Link>
 
-            <div className="project-header mb-12">
-                <h1 className="text-4xl md:text-5xl font-bold font-outfit mb-4">{project.title}</h1>
-                <p className="text-xl text-slate-400 max-w-2xl">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mt-6">
-                    {project.tags.map((tag) => (
-                        <span key={tag} className="px-3 py-1 bg-white/5 rounded-full text-sm text-slate-300 border border-white/10">
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-
-                <div className="flex gap-4 mt-8">
+                <div className="flex items-center gap-2">
                     <a
                         href={project.demoLink}
                         target="_blank"
-                        className="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:scale-105 transition-transform inline-flex items-center gap-2"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-950 hover:bg-slate-200 transition-colors shadow-sm"
                     >
-                        Launch Experience <i className="ri-external-link-line"></i>
+                        <i className="ri-external-link-line"></i>
+                        <span className="hidden sm:inline">Live Demo</span>
                     </a>
                     {project.repoLink && (
                         <a
                             href={project.repoLink}
                             target="_blank"
-                            className="px-6 py-3 bg-white/10 text-white font-semibold rounded-lg hover:bg-white/20 transition-colors inline-flex items-center gap-2"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 text-slate-200 hover:text-white hover:bg-white/20 border border-white/10 transition-colors"
                         >
-                            View Source <i className="ri-github-line"></i>
+                            <i className="ri-github-line"></i>
+                            <span className="hidden sm:inline">GitHub</span>
                         </a>
                     )}
                 </div>
             </div>
 
-            <div className="project-content prose prose-invert max-w-none prose-lg">
-                {project.isIcon ? (
-                    <div className="w-full h-[300px] bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center mb-12 border border-white/10">
-                        <i className={`${project.image} text-9xl text-white/50`}></i>
-                    </div>
-                ) : (
-                    <div className="w-full h-[400px] bg-slate-800 rounded-2xl mb-12 overflow-hidden border border-white/10">
-                        {/* Image placeholder */}
-                    </div>
-                )}
+            {/* Case Study Header */}
+            <header className="mb-12">
+                {/* Category & Status */}
+                <div className="flex flex-wrap items-center gap-3 mb-4">
+                    <span
+                        className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border backdrop-blur-sm ${getCategoryBadgeStyles(
+                            project.category
+                        )}`}
+                    >
+                        <span className="w-2 h-2 rounded-full bg-current animate-pulse"></span>
+                        {project.category}
+                    </span>
+                    <span className="text-xs font-mono text-slate-500 uppercase tracking-widest">
+                        Flagship Case Study
+                    </span>
+                </div>
 
-                <div dangerouslySetInnerHTML={{ __html: project.content }} />
+                {/* Title */}
+                <h1 className="text-3xl sm:text-5xl font-extrabold font-outfit text-white tracking-tight leading-[1.15] mb-6">
+                    {project.title}
+                </h1>
+
+                {/* Subtitle / Overview Description */}
+                <p className="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-3xl mb-8">
+                    {project.description}
+                </p>
+
+                {/* Tech Stack Matrix Badges */}
+                <div className="mb-8">
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                        <i className="ri-cpu-line text-indigo-400"></i> Core Architectural Stack
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                            <span
+                                key={tag}
+                                className="px-3 py-1.5 bg-slate-900/90 text-slate-200 rounded-lg text-xs sm:text-sm font-mono border border-white/[0.08] hover:border-indigo-500/40 hover:bg-slate-800/80 transition-all"
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Direct Action CTAs */}
+                <div className="flex flex-wrap gap-4 pt-2">
+                    <a
+                        href={project.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-3.5 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 inline-flex items-center gap-2.5 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
+                    >
+                        <span>Launch Live Experience</span>
+                        <i className="ri-external-link-line text-lg"></i>
+                    </a>
+                    {project.repoLink && (
+                        <a
+                            href={project.repoLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-6 py-3.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold rounded-xl border border-white/10 hover:border-white/20 transition-all duration-200 inline-flex items-center gap-2.5 hover:-translate-y-0.5"
+                        >
+                            <i className="ri-github-fill text-lg"></i>
+                            <span>View Source Repository</span>
+                        </a>
+                    )}
+                </div>
+            </header>
+
+            {/* Visual Hero Showcase Banner */}
+            <div className="relative w-full h-[260px] sm:h-[340px] bg-gradient-to-br from-slate-900 via-indigo-950/30 to-slate-950 rounded-2xl flex flex-col items-center justify-center mb-14 border border-white/[0.08] overflow-hidden shadow-2xl">
+                <div className="absolute inset-0 bg-radial from-indigo-500/10 via-transparent to-transparent opacity-60" />
+                <div className="relative z-10 w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-slate-900/80 border border-white/[0.15] flex items-center justify-center shadow-2xl backdrop-blur-md">
+                    <i className={`${project.image} text-5xl sm:text-6xl text-indigo-300 drop-shadow-md`}></i>
+                </div>
+                <div className="relative z-10 mt-5 text-center px-4">
+                    <p className="text-xs font-mono uppercase tracking-widest text-slate-400">
+                        {project.category} • Production Blueprint
+                    </p>
+                    <p className="text-sm font-medium text-slate-300 mt-1">
+                        System Architecture & Technical Implementation Notes
+                    </p>
+                </div>
             </div>
+
+            {/* Detailed Structured Case Study Body */}
+            <section className="case-study-content mb-16">
+                <div dangerouslySetInnerHTML={{ __html: project.content }} />
+            </section>
+
+            {/* Project Navigation Carousel Footer */}
+            <nav className="border-t border-white/[0.1] pt-10 mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Link
+                    href={`/work/${prevProject.slug}`}
+                    className="group p-5 rounded-xl bg-slate-900/60 border border-white/[0.08] hover:border-indigo-500/40 hover:bg-slate-800/60 transition-all flex flex-col justify-between"
+                >
+                    <span className="text-xs font-mono uppercase text-slate-400 flex items-center gap-1.5 group-hover:text-indigo-400 transition-colors">
+                        <i className="ri-arrow-left-s-line"></i> Previous Case Study
+                    </span>
+                    <span className="text-base font-bold font-outfit text-white mt-2 group-hover:text-indigo-200 transition-colors">
+                        {prevProject.title}
+                    </span>
+                </Link>
+
+                <Link
+                    href={`/work/${nextProject.slug}`}
+                    className="group p-5 rounded-xl bg-slate-900/60 border border-white/[0.08] hover:border-indigo-500/40 hover:bg-slate-800/60 transition-all flex flex-col justify-between text-left sm:text-right"
+                >
+                    <span className="text-xs font-mono uppercase text-slate-400 flex items-center justify-start sm:justify-end gap-1.5 group-hover:text-indigo-400 transition-colors">
+                        Next Case Study <i className="ri-arrow-right-s-line"></i>
+                    </span>
+                    <span className="text-base font-bold font-outfit text-white mt-2 group-hover:text-indigo-200 transition-colors">
+                        {nextProject.title}
+                    </span>
+                </Link>
+            </nav>
         </main>
     );
 }
