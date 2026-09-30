@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
     return (
-        <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-[1200px] mx-auto min-h-screen">
+        <main className="pt-24 sm:pt-28 md:pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto min-h-screen">
             <SelectedWorks showHeader={true} />
         </main>
     );

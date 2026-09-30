@@ -3,17 +3,17 @@
 import { useState, useEffect } from 'react';
 
 const phrases = [
-    "digital experiences.",
-    "web applications.",
-    "interactive interfaces.",
-    "software solutions."
+    "ambient operating systems.",
+    "distributed architectures.",
+    "AI financial intelligence.",
+    "high-concurrency web engines."
 ];
 
 export default function Typewriter() {
     const [text, setText] = useState('');
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);
-    const [typingSpeed, setTypingSpeed] = useState(150);
+    const [typingSpeed, setTypingSpeed] = useState(120);
 
     useEffect(() => {
         const handleType = () => {
@@ -25,14 +25,14 @@ export default function Typewriter() {
                 : fullText.substring(0, text.length + 1)
             );
 
-            setTypingSpeed(isDeleting ? 50 : 100);
+            setTypingSpeed(isDeleting ? 40 : 80);
 
             if (!isDeleting && text === fullText) {
-                setTimeout(() => setIsDeleting(true), 2000); // Wait at end of word
+                setTimeout(() => setIsDeleting(true), 2200); // Hold completed text
             } else if (isDeleting && text === '') {
                 setIsDeleting(false);
                 setLoopNum(loopNum + 1);
-                setTypingSpeed(500); // Pause before new word
+                setTypingSpeed(400); // Pause before next phrase
             }
         };
 
@@ -41,9 +41,9 @@ export default function Typewriter() {
     }, [text, isDeleting, loopNum, typingSpeed]);
 
     return (
-        <span className="txt-gradient" id="typewriter">
-            {text}
-            <span className="cursor-blink">|</span>
+        <span className="inline-block min-h-[1.15em] txt-gradient font-bold" id="typewriter">
+            <span>{text}</span>
+            <span className="cursor-blink font-light ml-0.5 select-none" aria-hidden="true">|</span>
         </span>
     );
 }

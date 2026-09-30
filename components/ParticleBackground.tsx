@@ -12,9 +12,9 @@ class Particle {
     constructor(width: number, height: number) {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
-        this.size = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.size = Math.random() * 1.5 + 0.8;
     }
 
     update(width: number, height: number) {
@@ -26,7 +26,7 @@ class Particle {
     }
 
     draw(ctx: CanvasRenderingContext2D) {
-        ctx.fillStyle = 'rgba(99, 102, 241, 0.5)'; // Indigo color
+        ctx.fillStyle = 'rgba(99, 102, 241, 0.45)'; // Indigo subtle
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -53,7 +53,11 @@ export default function ParticleBackground() {
 
         const init = () => {
             particles = [];
-            const numberOfParticles = Math.floor((window.innerWidth * window.innerHeight) / 15000);
+            // Adaptive particle count based on screen area to ensure 60fps on all devices
+            const numberOfParticles = Math.min(
+                Math.floor((window.innerWidth * window.innerHeight) / 18000),
+                80
+            );
             for (let i = 0; i < numberOfParticles; i++) {
                 particles.push(new Particle(canvas.width, canvas.height));
             }
@@ -67,16 +71,16 @@ export default function ParticleBackground() {
                 particle.update(canvas.width, canvas.height);
                 particle.draw(ctx);
 
-                // Draw connections
+                // Draw proximity connections
                 for (let j = index + 1; j < particles.length; j++) {
                     const dx = particle.x - particles[j].x;
                     const dy = particle.y - particles[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 150) {
+                    if (distance < 130) {
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 - distance / 1000})`;
-                        ctx.lineWidth = 1;
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.12 - distance / 1200})`;
+                        ctx.lineWidth = 0.8;
                         ctx.moveTo(particle.x, particle.y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.stroke();
@@ -87,17 +91,19 @@ export default function ParticleBackground() {
             animationFrameId = requestAnimationFrame(animate);
         };
 
-        window.addEventListener('resize', () => {
+        const handleResize = () => {
             resizeCanvas();
             init();
-        });
+        };
+
+        window.addEventListener('resize', handleResize);
 
         resizeCanvas();
         init();
         animate();
 
         return () => {
-            window.removeEventListener('resize', resizeCanvas);
+            window.removeEventListener('resize', handleResize);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
@@ -105,16 +111,8 @@ export default function ParticleBackground() {
     return (
         <canvas
             ref={canvasRef}
-            style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                zIndex: -1,
-                pointerEvents: 'none',
-                opacity: 0.6
-            }}
+            aria-hidden="true"
+            className="fixed inset-0 w-full h-full -z-10 pointer-events-none opacity-40 transition-opacity duration-700"
         />
     );
 }

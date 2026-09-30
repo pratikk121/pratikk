@@ -49,7 +49,7 @@ export default function SelectedWorks({ showHeader = true }: SelectedWorksProps)
     };
 
     return (
-        <section id="projects" className="py-16 md:py-24">
+        <section id="projects" className="py-12 sm:py-16 md:py-20">
             {showHeader && (
                 <div className="section-header mb-10 text-center md:text-left">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 mb-3">
@@ -116,13 +116,13 @@ export default function SelectedWorks({ showHeader = true }: SelectedWorksProps)
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.96 }}
                             transition={{ duration: 0.3 }}
-                            className="group relative flex flex-col justify-between rounded-2xl bg-slate-900/70 border border-white/[0.08] hover:border-indigo-500/30 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 overflow-hidden backdrop-blur-sm"
+                            className="group relative flex flex-col justify-between rounded-2xl bg-slate-900/60 border border-white/[0.08] hover:border-indigo-500/30 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300 overflow-hidden backdrop-blur-sm"
                         >
                             {/* Card Top: Visual Header */}
                             <div>
                                 <div className="relative h-48 sm:h-52 bg-gradient-to-br from-slate-900 via-slate-950 to-indigo-950/40 flex items-center justify-center border-b border-white/[0.06] overflow-hidden">
                                     {/* Ambient Glow */}
-                                    <div className="absolute inset-0 bg-radial from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(99,102,241,0.15)_0%,_transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                                     {/* Category Pill Badge (Top Left) */}
                                     <div className="absolute top-4 left-4 z-10">

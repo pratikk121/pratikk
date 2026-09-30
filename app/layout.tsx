@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap' });
 
 export const viewport: Viewport = {
-  themeColor: '#0f172a',
+  themeColor: '#090d16',
   width: 'device-width',
   initialScale: 1,
   colorScheme: 'dark',

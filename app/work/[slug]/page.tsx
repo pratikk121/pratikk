@@ -88,9 +88,9 @@ export default async function ProjectPage({ params }: PageProps) {
     };
 
     return (
-        <main className="min-h-screen pt-24 pb-24 px-4 sm:px-6 lg:px-8 max-w-[1040px] mx-auto">
+        <main className="min-h-screen pt-24 sm:pt-28 md:pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
             {/* Sticky Navigation Subheader */}
-            <div className="sticky top-20 z-40 mb-8 -mx-4 sm:-mx-6 px-4 sm:px-6 py-3 bg-slate-950/80 backdrop-blur-xl border-y border-white/[0.08] flex items-center justify-between gap-4 transition-all">
+            <div className="sticky top-[var(--nav-height)] z-30 mb-8 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-slate-950/85 backdrop-blur-xl border-y border-white/[0.08] flex items-center justify-between gap-4 transition-all">
                 <Link
                     href="/work"
                     className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors group"
@@ -173,7 +173,7 @@ export default async function ProjectPage({ params }: PageProps) {
                         href={project.demoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-3.5 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-200 inline-flex items-center gap-2.5 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5"
+                        className="cta-button text-base px-6 py-3.5"
                     >
                         <span>Launch Live Experience</span>
                         <i className="ri-external-link-line text-lg"></i>
@@ -183,7 +183,7 @@ export default async function ProjectPage({ params }: PageProps) {
                             href={project.repoLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-6 py-3.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold rounded-xl border border-white/10 hover:border-white/20 transition-all duration-200 inline-flex items-center gap-2.5 hover:-translate-y-0.5"
+                            className="px-6 py-3.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold rounded-full border border-white/10 hover:border-white/20 transition-all duration-200 inline-flex items-center gap-2.5 hover:-translate-y-0.5 text-sm"
                         >
                             <i className="ri-github-fill text-lg"></i>
                             <span>View Source Repository</span>
@@ -194,7 +194,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
             {/* Visual Hero Showcase Banner */}
             <div className="relative w-full h-[260px] sm:h-[340px] bg-gradient-to-br from-slate-900 via-indigo-950/30 to-slate-950 rounded-2xl flex flex-col items-center justify-center mb-14 border border-white/[0.08] overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-radial from-indigo-500/10 via-transparent to-transparent opacity-60" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(99,102,241,0.15)_0%,_transparent_70%)] opacity-70 pointer-events-none" />
                 <div className="relative z-10 w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-slate-900/80 border border-white/[0.15] flex items-center justify-center shadow-2xl backdrop-blur-md">
                     <i className={`${project.image} text-5xl sm:text-6xl text-indigo-300 drop-shadow-md`}></i>
                 </div>
