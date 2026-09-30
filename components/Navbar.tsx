@@ -44,7 +44,7 @@ export default function Navbar() {
     };
 
     return (
-        <header className={`transition-all duration-300 ${scrolled ? 'shadow-lg shadow-black/20' : ''}`}>
+        <header className={`site-header transition-all duration-300 ${scrolled ? 'shadow-lg shadow-black/20' : ''}`}>
             <div className="nav-container">
                 {/* Brand Logo */}
                 <Link href="/" className="logo group">

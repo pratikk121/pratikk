@@ -90,7 +90,7 @@ export default async function ProjectPage({ params }: PageProps) {
     return (
         <main className="min-h-screen pt-24 sm:pt-28 md:pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
             {/* Sticky Navigation Subheader */}
-            <div className="sticky top-[var(--nav-height)] z-30 mb-8 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-slate-950/85 backdrop-blur-xl border-y border-white/[0.08] flex items-center justify-between gap-4 transition-all">
+            <div className="sticky top-[var(--nav-height)] z-20 mb-8 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-slate-950/95 backdrop-blur-xl border-y border-white/[0.08] flex items-center justify-between gap-4 transition-all">
                 <Link
                     href="/work"
                     className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors group"
@@ -124,7 +124,7 @@ export default async function ProjectPage({ params }: PageProps) {
             </div>
 
             {/* Case Study Header */}
-            <header className="mb-12">
+            <section aria-label="Project Overview" className="mb-12">
                 {/* Category & Status */}
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                     <span
@@ -190,7 +190,7 @@ export default async function ProjectPage({ params }: PageProps) {
                         </a>
                     )}
                 </div>
-            </header>
+            </section>
 
             {/* Visual Hero Showcase Banner */}
             <div className="relative w-full h-[260px] sm:h-[340px] bg-gradient-to-br from-slate-900 via-indigo-950/30 to-slate-950 rounded-2xl flex flex-col items-center justify-center mb-14 border border-white/[0.08] overflow-hidden shadow-2xl">
