@@ -48,18 +48,19 @@ export default function Writing() {
         <section id="writing" className="py-12 sm:py-16 reveal active">
             {/* Section Header */}
             <div className="section-header mb-10 text-center md:text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-purple-500/10 text-purple-300 border border-purple-500/20 mb-3">
-                    <i className="ri-quill-pen-line text-sm"></i> Technical Publications
+                <div className="resend-tag mb-3">
+                    <i className="ri-quill-pen-line text-xs text-[#9281f7]"></i>
+                    <span>Technical Publications</span>
                 </div>
-                <h2 className="text-3xl sm:text-4xl font-bold font-outfit text-white flex items-center justify-center md:justify-start gap-3">
-                    <i className="ri-article-line text-purple-400"></i> Engineering Notes & Architecture
+                <h2 className="text-3xl sm:text-4xl font-bold font-outfit text-[#ffffff] tracking-[-0.03em] flex items-center justify-center md:justify-start gap-3">
+                    <span>Engineering Notes &amp; Architecture</span>
                 </h2>
-                <p className="text-slate-400 max-w-2xl text-base sm:text-lg mt-2">
+                <p className="text-[#a1a4a5] max-w-2xl text-base sm:text-lg mt-3 leading-relaxed tracking-[-0.01em]">
                     Deep dives on systems design, real-time client runtimes, database invariants, and high-performance frontend engineering.
                 </p>
             </div>
 
-            {/* Articles Grid */}
+            {/* Articles Grid: 16px radius, #000000 card bg, 1px #292d30 border, zero drop shadows */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {articles.map((article) => {
                     const href = article.externalLink || `/writing/${article.slug}`;
@@ -68,34 +69,34 @@ export default function Writing() {
                         <Link
                             key={article.title}
                             href={href}
-                            className="group relative flex flex-col justify-between rounded-2xl bg-slate-900/60 border border-white/[0.08] hover:border-purple-500/30 hover:bg-slate-900/80 p-6 sm:p-7 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/5 backdrop-blur-sm"
+                            className="resend-card group flex flex-col justify-between p-6 sm:p-7 transition-colors duration-150 hover:border-[#9281f7]"
                         >
                             <div>
                                 {/* Meta Header */}
-                                <div className="flex items-center justify-between gap-2 mb-4 text-xs font-mono text-slate-400">
-                                    <span className="px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                                <div className="flex items-center justify-between gap-2 mb-4 text-xs font-mono text-[#a1a4a5]">
+                                    <span className="resend-tag text-[11px] py-0.5 px-2">
                                         {article.tag}
                                     </span>
                                     <span>{article.readingTime}</span>
                                 </div>
 
                                 {/* Title */}
-                                <h3 className="text-lg font-bold font-outfit text-white group-hover:text-purple-200 transition-colors mb-3 leading-snug">
+                                <h3 className="text-lg font-bold font-outfit text-[#ffffff] group-hover:text-[#9281f7] transition-colors mb-3 leading-snug tracking-tight">
                                     {article.title}
                                 </h3>
 
                                 {/* Excerpt */}
-                                <p className="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-6">
+                                <p className="text-sm text-[#a1a4a5] leading-relaxed line-clamp-3 mb-6 tracking-[-0.01em]">
                                     {article.description}
                                 </p>
                             </div>
 
                             {/* Footer Link & Date */}
-                            <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs">
-                                <span className="font-mono text-slate-500">{article.date}</span>
-                                <span className="inline-flex items-center gap-1 font-semibold text-purple-400 group-hover:text-purple-300 transition-colors">
+                            <div className="pt-4 border-t border-[#292d30] flex items-center justify-between text-xs font-mono">
+                                <span className="text-[#6e727a]">{article.date}</span>
+                                <span className="inline-flex items-center gap-1 font-semibold text-[#9281f7] group-hover:text-[#baa7ff] transition-colors">
                                     <span>Read Analysis</span>
-                                    <i className="ri-arrow-right-line text-sm transform transition-transform group-hover:translate-x-1"></i>
+                                    <i className="ri-arrow-right-line text-xs transform transition-transform group-hover:translate-x-1"></i>
                                 </span>
                             </div>
                         </Link>

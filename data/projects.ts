@@ -110,7 +110,7 @@ export const projects: Project[] = [
         repoLink: "https://github.com/pratikk121/Devlogic-New",
         content: `
       <h2>Architectural Overview</h2>
-      <p>Devlogic Systems is the live commercial platform for Devlogic, an engineering agency specializing in custom software development and cloud architecture. The system features an interactive Project Scoping Engine—a client-facing tool that allows enterprise clients to model application architectures, technical stack combinations, security compliance tiers, and team composition to receive instant, mathematically modeled development timelines and budget projections. Built with React 19, Vite 6, and Tailwind CSS v4, the application is deployed on edge CDNs for near-zero global TTFB.</p>
+      <p>Devlogic Systems is the live commercial platform for Devlogic, an engineering agency specializing in custom software development and cloud architecture. The system features an interactive Project Scoping Engine - a client-facing tool that allows enterprise clients to model application architectures, technical stack combinations, security compliance tiers, and team composition to receive instant, mathematically modeled development timelines and budget projections. Built with React 19, Vite 6, and Tailwind CSS v4, the application is deployed on edge CDNs for near-zero global TTFB.</p>
 
       <ul>
         <li><strong>Interactive Scope Engine:</strong> Directed acyclic graph (DAG) dependency solver that computes engineering man-hours, operational risk multipliers, and infrastructure overheads based on chosen features.</li>

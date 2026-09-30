@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 
 const phrases = [
-    "ambient operating systems.",
-    "distributed architectures.",
-    "AI financial intelligence.",
-    "high-concurrency web engines."
+    "scalable full-stack platforms.",
+    "ambient web environments.",
+    "intelligent AI applications.",
+    "resilient cloud systems."
 ];
 
 export default function Typewriter() {

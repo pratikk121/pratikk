@@ -77,25 +77,25 @@ export default async function ProjectPage({ params }: PageProps) {
     const getCategoryBadgeStyles = (category: typeof project.category) => {
         switch (category) {
             case "Systems & OS":
-                return "bg-cyan-500/10 text-cyan-300 border-cyan-500/30";
+                return "text-[#9281f7] border-[#292d30] bg-[#000000]";
             case "Fintech & AI":
-                return "bg-emerald-500/10 text-emerald-300 border-emerald-500/30";
+                return "text-[#3ad389] border-[#292d30] bg-[#000000]";
             case "Commercial & CRM":
-                return "bg-indigo-500/10 text-indigo-300 border-indigo-500/30";
+                return "text-[#3b9eff] border-[#292d30] bg-[#000000]";
             default:
-                return "bg-white/10 text-slate-300 border-white/20";
+                return "text-[#a1a4a5] border-[#292d30] bg-[#000000]";
         }
     };
 
     return (
         <main className="min-h-screen pt-24 sm:pt-28 md:pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-            {/* Sticky Navigation Subheader */}
-            <div className="sticky top-[var(--nav-height)] z-20 mb-8 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-slate-950/95 backdrop-blur-xl border-y border-white/[0.08] flex items-center justify-between gap-4 transition-all">
+            {/* Sticky Navigation Subheader: 1px #292d30 border */}
+            <div className="sticky top-[var(--nav-height)] z-20 mb-8 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-[#000000]/90 backdrop-blur-md border-y border-[#292d30] flex items-center justify-between gap-4 transition-all">
                 <Link
                     href="/work"
-                    className="inline-flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors group"
+                    className="inline-flex items-center gap-2 text-sm font-medium text-[#a1a4a5] hover:text-[#ffffff] transition-colors group"
                 >
-                    <i className="ri-arrow-left-line text-base transform transition-transform group-hover:-translate-x-1"></i>
+                    <i className="ri-arrow-left-line text-sm transform transition-transform group-hover:-translate-x-1"></i>
                     <span>Back to Portfolio</span>
                 </Link>
 
@@ -104,9 +104,9 @@ export default async function ProjectPage({ params }: PageProps) {
                         href={project.demoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-950 hover:bg-slate-200 transition-colors shadow-sm"
+                        className="resend-btn-ghost text-xs py-1.5 px-3"
                     >
-                        <i className="ri-external-link-line"></i>
+                        <i className="ri-external-link-line text-xs"></i>
                         <span className="hidden sm:inline">Live Demo</span>
                     </a>
                     {project.repoLink && (
@@ -114,9 +114,9 @@ export default async function ProjectPage({ params }: PageProps) {
                             href={project.repoLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/10 text-slate-200 hover:text-white hover:bg-white/20 border border-white/10 transition-colors"
+                            className="resend-btn-ghost text-xs py-1.5 px-3"
                         >
-                            <i className="ri-github-line"></i>
+                            <i className="ri-github-line text-xs"></i>
                             <span className="hidden sm:inline">GitHub</span>
                         </a>
                     )}
@@ -128,38 +128,38 @@ export default async function ProjectPage({ params }: PageProps) {
                 {/* Category & Status */}
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                     <span
-                        className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold tracking-wide border backdrop-blur-sm ${getCategoryBadgeStyles(
+                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-medium border ${getCategoryBadgeStyles(
                             project.category
                         )}`}
                     >
-                        <span className="w-2 h-2 rounded-full bg-current animate-pulse"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
                         {project.category}
                     </span>
-                    <span className="text-xs font-mono text-slate-500 uppercase tracking-widest">
+                    <span className="text-xs font-mono text-[#6e727a] uppercase tracking-wider">
                         Flagship Case Study
                     </span>
                 </div>
 
                 {/* Title */}
-                <h1 className="text-3xl sm:text-5xl font-extrabold font-outfit text-white tracking-tight leading-[1.15] mb-6">
+                <h1 className="text-3xl sm:text-5xl font-bold font-outfit text-[#ffffff] tracking-[-0.03em] leading-[1.15] mb-6">
                     {project.title}
                 </h1>
 
                 {/* Subtitle / Overview Description */}
-                <p className="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-3xl mb-8">
+                <p className="text-lg sm:text-xl text-[#a1a4a5] leading-relaxed max-w-3xl mb-8">
                     {project.description}
                 </p>
 
-                {/* Tech Stack Matrix Badges */}
+                {/* Tech Stack Matrix Badges (6px radius, 1px #292d30 border) */}
                 <div className="mb-8">
-                    <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
-                        <i className="ri-cpu-line text-indigo-400"></i> Core Architectural Stack
+                    <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a4a5] mb-3 flex items-center gap-2">
+                        <i className="ri-cpu-line text-[#9281f7]"></i> Core Architectural Stack
                     </h4>
                     <div className="flex flex-wrap gap-2">
                         {project.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="px-3 py-1.5 bg-slate-900/90 text-slate-200 rounded-lg text-xs sm:text-sm font-mono border border-white/[0.08] hover:border-indigo-500/40 hover:bg-slate-800/80 transition-all"
+                                className="resend-tag font-mono text-xs"
                             >
                                 {tag}
                             </span>
@@ -167,43 +167,42 @@ export default async function ProjectPage({ params }: PageProps) {
                     </div>
                 </div>
 
-                {/* Direct Action CTAs */}
-                <div className="flex flex-wrap gap-4 pt-2">
+                {/* Direct Action CTAs: 6px radius */}
+                <div className="flex flex-wrap gap-3 pt-2">
                     <a
                         href={project.demoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="cta-button text-base px-6 py-3.5"
+                        className="resend-btn-ghost text-sm px-5 py-2.5 hover:border-[#ffffff]"
                     >
                         <span>Launch Live Experience</span>
-                        <i className="ri-external-link-line text-lg"></i>
+                        <i className="ri-external-link-line text-sm"></i>
                     </a>
                     {project.repoLink && (
                         <a
                             href={project.repoLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-6 py-3.5 bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold rounded-full border border-white/10 hover:border-white/20 transition-all duration-200 inline-flex items-center gap-2.5 hover:-translate-y-0.5 text-sm"
+                            className="resend-btn-ghost text-sm px-5 py-2.5 text-[#9281f7] hover:border-[#9281f7]"
                         >
-                            <i className="ri-github-fill text-lg"></i>
+                            <i className="ri-github-fill text-sm"></i>
                             <span>View Source Repository</span>
                         </a>
                     )}
                 </div>
             </section>
 
-            {/* Visual Hero Showcase Banner */}
-            <div className="relative w-full h-[260px] sm:h-[340px] bg-gradient-to-br from-slate-900 via-indigo-950/30 to-slate-950 rounded-2xl flex flex-col items-center justify-center mb-14 border border-white/[0.08] overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(99,102,241,0.15)_0%,_transparent_70%)] opacity-70 pointer-events-none" />
-                <div className="relative z-10 w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-slate-900/80 border border-white/[0.15] flex items-center justify-center shadow-2xl backdrop-blur-md">
-                    <i className={`${project.image} text-5xl sm:text-6xl text-indigo-300 drop-shadow-md`}></i>
+            {/* Visual Hero Showcase Banner: 16px radius, #0b0e14 bg, 1px #292d30 border, zero drop shadows */}
+            <div className="relative w-full h-[240px] sm:h-[300px] bg-[#0b0e14] rounded-2xl flex flex-col items-center justify-center mb-14 border border-[#292d30] overflow-hidden">
+                <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#000000] border border-[#292d30] flex items-center justify-center">
+                    <i className={`${project.image} text-4xl sm:text-5xl text-[#9281f7]`}></i>
                 </div>
                 <div className="relative z-10 mt-5 text-center px-4">
-                    <p className="text-xs font-mono uppercase tracking-widest text-slate-400">
+                    <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a4a5]">
                         {project.category} • Production Blueprint
                     </p>
-                    <p className="text-sm font-medium text-slate-300 mt-1">
-                        System Architecture & Technical Implementation Notes
+                    <p className="text-sm font-medium text-[#f0f0f0] mt-1">
+                        System Architecture &amp; Technical Implementation Notes
                     </p>
                 </div>
             </div>
@@ -213,28 +212,28 @@ export default async function ProjectPage({ params }: PageProps) {
                 <div dangerouslySetInnerHTML={{ __html: project.content }} />
             </section>
 
-            {/* Project Navigation Carousel Footer */}
-            <nav className="border-t border-white/[0.1] pt-10 mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Project Navigation Footer: 16px radius, #000000 card bg, 1px #292d30 border */}
+            <nav className="border-t border-[#292d30] pt-10 mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Link
                     href={`/work/${prevProject.slug}`}
-                    className="group p-5 rounded-xl bg-slate-900/60 border border-white/[0.08] hover:border-indigo-500/40 hover:bg-slate-800/60 transition-all flex flex-col justify-between"
+                    className="resend-card p-5 flex flex-col justify-between hover:border-[#9281f7] transition-colors"
                 >
-                    <span className="text-xs font-mono uppercase text-slate-400 flex items-center gap-1.5 group-hover:text-indigo-400 transition-colors">
+                    <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a4a5] flex items-center gap-1.5">
                         <i className="ri-arrow-left-s-line"></i> Previous Case Study
                     </span>
-                    <span className="text-base font-bold font-outfit text-white mt-2 group-hover:text-indigo-200 transition-colors">
+                    <span className="text-base font-bold font-outfit text-[#ffffff] mt-2 tracking-tight">
                         {prevProject.title}
                     </span>
                 </Link>
 
                 <Link
                     href={`/work/${nextProject.slug}`}
-                    className="group p-5 rounded-xl bg-slate-900/60 border border-white/[0.08] hover:border-indigo-500/40 hover:bg-slate-800/60 transition-all flex flex-col justify-between text-left sm:text-right"
+                    className="resend-card p-5 flex flex-col justify-between text-left sm:text-right hover:border-[#9281f7] transition-colors"
                 >
-                    <span className="text-xs font-mono uppercase text-slate-400 flex items-center justify-start sm:justify-end gap-1.5 group-hover:text-indigo-400 transition-colors">
+                    <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a4a5] flex items-center justify-start sm:justify-end gap-1.5">
                         Next Case Study <i className="ri-arrow-right-s-line"></i>
                     </span>
-                    <span className="text-base font-bold font-outfit text-white mt-2 group-hover:text-indigo-200 transition-colors">
+                    <span className="text-base font-bold font-outfit text-[#ffffff] mt-2 tracking-tight">
                         {nextProject.title}
                     </span>
                 </Link>

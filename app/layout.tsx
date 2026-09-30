@@ -3,7 +3,7 @@ import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
 import 'remixicon/fonts/remixicon.css'; // Import RemixIcon CSS globally
 
-import ParticleBackground from "@/components/ParticleBackground";
+import SystemsCanvas from "@/components/SystemsCanvas";
 import Providers from "@/components/Providers";
 import CommandPalette from "@/components/CommandPalette";
 import LiveBlocksProvider from "@/components/LiveBlocksProvider";
@@ -15,7 +15,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap' });
 
 export const viewport: Viewport = {
-  themeColor: '#090d16',
+  themeColor: '#000000',
   width: 'device-width',
   initialScale: 1,
   colorScheme: 'dark',
@@ -97,8 +97,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body>
-        <div className="bg-mesh"></div>
-        <ParticleBackground />
+        <SystemsCanvas />
 
         <LiveBlocksProvider>
           <LiveCursors />
