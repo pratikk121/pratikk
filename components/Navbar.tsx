@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import MagneticButton from './MagneticButton';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,61 +26,66 @@ export default function Navbar() {
     };
 
     return (
-        <header className={`site-header transition-colors duration-200 ${scrolled ? 'border-b border-[#292d30]' : 'border-b border-[#292d30]/70'}`}>
+        <header className={`site-header transition-colors duration-150 ${scrolled ? 'border-b border-[#292d30] bg-[#000000]/95 backdrop-blur-md' : 'border-b border-[#292d30]/60 bg-[#000000]/80 backdrop-blur-sm'}`}>
             <div className="nav-container">
-                {/* Brand Logo with Iris Violet Brand Mark */}
+                {/* Brand Logo */}
                 <Link href="/" className="logo group">
-                    <span className="w-7 h-7 rounded-md bg-[#0b0e14] border border-[#292d30] flex items-center justify-center text-[#9281f7] group-hover:border-[#9281f7] transition-all">
-                        <i className="ri-terminal-box-line text-sm"></i>
+                    <span className="font-outfit font-bold tracking-tight text-[#ffffff]">
+                        Pratik Kadole
                     </span>
-                    <span className="font-outfit font-bold tracking-tight text-[#ffffff]">pk<span className="text-[#9281f7]">.</span></span>
                 </Link>
 
                 {/* Desktop Nav Items */}
                 <nav className="hidden md:flex items-center gap-7">
                     <Link
-                        href="/about"
-                        className="text-sm font-medium text-[#abafb4] hover:text-[#ffffff] transition-colors"
-                    >
-                        About
-                    </Link>
-                    <Link
-                        href="/work"
-                        className="text-sm font-medium text-[#abafb4] hover:text-[#ffffff] transition-colors"
+                        href="/#projects"
+                        className="text-sm font-medium text-[#a1a4a5] hover:text-[#ffffff] transition-colors"
                     >
                         Work
                     </Link>
                     <Link
-                        href="/contact"
-                        className="text-sm font-medium text-[#abafb4] hover:text-[#ffffff] transition-colors"
+                        href="/#about"
+                        className="text-sm font-medium text-[#a1a4a5] hover:text-[#ffffff] transition-colors"
+                    >
+                        About
+                    </Link>
+                    <a
+                        href="https://github.com/pratikk121"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-[#a1a4a5] hover:text-[#ffffff] transition-colors flex items-center gap-1"
+                    >
+                        <span>GitHub</span>
+                        <i className="ri-external-link-line text-xs"></i>
+                    </a>
+                    <Link
+                        href="/#contact"
+                        className="text-sm font-medium text-[#a1a4a5] hover:text-[#ffffff] transition-colors"
                     >
                         Contact
                     </Link>
                 </nav>
 
-                {/* Right Actions: Command Palette & Ghost CTA */}
+                {/* Right Actions: Command Palette & Get in Touch CTA */}
                 <div className="flex items-center gap-2 sm:gap-3">
-                    {/* Command Palette Quick Trigger Button */}
                     <button
                         onClick={triggerCommandPalette}
                         className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-[#292d30] hover:border-[#ffffff] bg-[#000000] text-[#a1a4a5] hover:text-[#ffffff] text-xs font-medium transition-colors"
-                        title="Open Command Palette (⌘K)"
+                        title="Search (⌘K)"
                     >
-                        <i className="ri-command-line text-xs"></i>
-                        <span>⌘K</span>
+                        <i className="ri-search-line text-xs"></i>
+                        <span>Search</span>
+                        <kbd className="text-[10px] text-[#6e727a] ml-1">⌘K</kbd>
                     </button>
 
-                    {/* Desktop Resend Ghost CTA Button */}
-                    <div className="hidden md:block">
-                        <MagneticButton href="/contact">
-                            <span className="resend-btn-ghost">
-                                <span>Let&apos;s Talk</span>
-                                <i className="ri-arrow-right-line text-xs"></i>
-                            </span>
-                        </MagneticButton>
-                    </div>
+                    <Link
+                        href="/#contact"
+                        className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[#292d30] hover:border-[#ffffff] text-xs font-semibold text-[#f0f0f0] transition-colors"
+                    >
+                        <span>Contact</span>
+                    </Link>
 
-                    {/* Mobile Menu Hamburger Toggle */}
+                    {/* Mobile Menu Toggle */}
                     <button
                         className="md:hidden p-2 rounded-md text-[#a1a4a5] hover:text-[#ffffff] hover:bg-[#292d30]/30 transition-colors cursor-pointer"
                         onClick={toggleMenu}
@@ -96,46 +100,47 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/* Mobile Slide-down Drawer Navigation */}
+            {/* Mobile Menu Dropdown */}
             {isMenuOpen && (
-                <div className="md:hidden fixed inset-x-0 top-[var(--nav-height)] bg-[#000000] border-b border-[#292d30] p-6 flex flex-col gap-5 animate-in slide-in-from-top-2 duration-200">
-                    <nav className="flex flex-col gap-3">
+                <div className="md:hidden fixed inset-x-0 top-[var(--nav-height)] bg-[#000000] border-b border-[#292d30] p-6 flex flex-col gap-4 animate-in slide-in-from-top-2 duration-150">
+                    <nav className="flex flex-col gap-2">
                         <Link
-                            href="/about"
-                            className="text-base font-medium text-[#f0f0f0] hover:text-white flex items-center justify-between py-2 border-b border-[#292d30]/60"
+                            href="/#projects"
+                            className="text-sm font-medium text-[#f0f0f0] hover:text-white py-2 border-b border-[#292d30]/60 flex items-center justify-between"
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            <span>Work</span>
+                            <i className="ri-arrow-right-s-line text-[#6e727a]"></i>
+                        </Link>
+                        <Link
+                            href="/#about"
+                            className="text-sm font-medium text-[#f0f0f0] hover:text-white py-2 border-b border-[#292d30]/60 flex items-center justify-between"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             <span>About</span>
-                            <i className="ri-arrow-right-s-line text-[#a1a4a5]"></i>
+                            <i className="ri-arrow-right-s-line text-[#6e727a]"></i>
                         </Link>
-                        <Link
-                            href="/work"
-                            className="text-base font-medium text-[#f0f0f0] hover:text-white flex items-center justify-between py-2 border-b border-[#292d30]/60"
+                        <a
+                            href="https://github.com/pratikk121"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm font-medium text-[#f0f0f0] hover:text-white py-2 border-b border-[#292d30]/60 flex items-center justify-between"
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            <span>Selected Work</span>
-                            <i className="ri-arrow-right-s-line text-[#a1a4a5]"></i>
-                        </Link>
+                            <span>GitHub Profile</span>
+                            <i className="ri-external-link-line text-xs text-[#6e727a]"></i>
+                        </a>
                         <Link
-                            href="/contact"
-                            className="text-base font-medium text-[#f0f0f0] hover:text-white flex items-center justify-between py-2 border-b border-[#292d30]/60"
+                            href="/#contact"
+                            className="text-sm font-medium text-[#f0f0f0] hover:text-white py-2 flex items-center justify-between"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             <span>Contact</span>
-                            <i className="ri-arrow-right-s-line text-[#a1a4a5]"></i>
+                            <i className="ri-arrow-right-s-line text-[#6e727a]"></i>
                         </Link>
                     </nav>
 
-                    <div className="pt-2 flex flex-col gap-3">
-                        <Link
-                            href="/contact"
-                            className="resend-btn-ghost w-full text-center justify-center py-2.5"
-                            onClick={() => setIsMenuOpen(false)}
-                        >
-                            <span>Let&apos;s Talk</span>
-                            <i className="ri-arrow-right-line text-xs"></i>
-                        </Link>
-
+                    <div className="pt-2 flex flex-col gap-2">
                         <button
                             onClick={() => {
                                 setIsMenuOpen(false);
@@ -143,8 +148,8 @@ export default function Navbar() {
                             }}
                             className="w-full flex items-center justify-center gap-2 py-2 rounded-md border border-[#292d30] bg-[#000000] text-[#a1a4a5] text-xs font-medium"
                         >
-                            <i className="ri-command-line text-xs"></i>
-                            <span>Search & Commands (⌘K)</span>
+                            <i className="ri-search-line text-xs"></i>
+                            <span>Search (⌘K)</span>
                         </button>
                     </div>
                 </div>

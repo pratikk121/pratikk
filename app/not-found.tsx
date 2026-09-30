@@ -25,8 +25,8 @@ export default function NotFound() {
         <p className="text-[#f0f0f0] text-sm sm:text-base leading-relaxed mb-4">
           The page at <span className="text-[#9281f7] font-mono break-all">{pathname}</span> could not be found. It may have been relocated or updated.
         </p>
-        <p className="text-xs font-mono text-[#a1a4a5]">
-          Navigate back to the portfolio or explore featured flagship systems below.
+        <p className="text-xs text-[#a1a4a5]">
+          Navigate back to the portfolio or explore public projects below.
         </p>
       </div>
 
@@ -48,7 +48,7 @@ export default function NotFound() {
         </Link>
         <button
           onClick={() => window.history.back()}
-          className="px-4 py-2 rounded-md text-[#a1a4a5] hover:text-[#ffffff] transition-colors text-xs font-mono border border-transparent hover:border-[#292d30] cursor-pointer"
+          className="px-4 py-2 rounded-md text-[#a1a4a5] hover:text-[#ffffff] transition-colors text-xs font-medium border border-transparent hover:border-[#292d30] cursor-pointer"
         >
           Go Back
         </button>

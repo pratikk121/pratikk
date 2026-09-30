@@ -24,37 +24,27 @@ export async function generateMetadata({
     if (!project) {
         return {
             title: "Project Not Found",
-            description: "The requested architectural case study could not be found.",
+            description: "The requested project could not be found.",
         };
     }
 
-    const title = `${project.title} | Case Study`;
+    const title = `${project.title} | Project Notes`;
     const description = project.description;
 
     return {
         title,
         description,
-        keywords: [
-            project.title,
-            project.category,
-            ...project.tags,
-            "Pratik Kadole",
-            "Systems Architecture",
-            "Full Stack Engineering",
-            "Case Study",
-        ],
         openGraph: {
-            title: `${project.title} - Engineering Case Study`,
+            title: `${project.title} | Pratik Kadole`,
             description,
             type: "article",
-            url: `https://pratikkadole.dev/work/${project.slug}`,
-            siteName: "Pratik Kadole Portfolio",
+            url: `https://pratikk.site/work/${project.slug}`,
+            siteName: "Pratik Kadole",
         },
         twitter: {
-            card: "summary_large_image",
-            title: `${project.title} - Engineering Case Study`,
+            card: "summary",
+            title: `${project.title} | Pratik Kadole`,
             description,
-            creator: "@pratikkadole",
         },
         alternates: {
             canonical: `/work/${project.slug}`,
@@ -74,92 +64,92 @@ export default async function ProjectPage({ params }: PageProps) {
     const prevProject = currentIndex > 0 ? projects[currentIndex - 1] : projects[projects.length - 1];
     const nextProject = currentIndex < projects.length - 1 ? projects[currentIndex + 1] : projects[0];
 
-    const getCategoryBadgeStyles = (category: typeof project.category) => {
-        switch (category) {
-            case "Systems & OS":
-                return "text-[#9281f7] border-[#292d30] bg-[#000000]";
-            case "Fintech & AI":
-                return "text-[#3ad389] border-[#292d30] bg-[#000000]";
-            case "Commercial & CRM":
-                return "text-[#3b9eff] border-[#292d30] bg-[#000000]";
+    const getStatusStyle = (status: typeof project.status) => {
+        switch (status) {
+            case "Commercial":
+                return "text-[#3ad389] border-[#292d30]";
+            case "Active Project":
+                return "text-[#3b9eff] border-[#292d30]";
+            case "Experimental":
+                return "text-[#9281f7] border-[#292d30]";
+            case "Prototype":
+                return "text-[#a1a4a5] border-[#292d30]";
             default:
-                return "text-[#a1a4a5] border-[#292d30] bg-[#000000]";
+                return "text-[#a1a4a5] border-[#292d30]";
         }
     };
 
     return (
-        <main className="min-h-screen pt-24 sm:pt-28 md:pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-            {/* Sticky Navigation Subheader: 1px #292d30 border */}
-            <div className="sticky top-[var(--nav-height)] z-20 mb-8 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-[#000000]/90 backdrop-blur-md border-y border-[#292d30] flex items-center justify-between gap-4 transition-all">
+        <main className="min-h-screen pt-24 sm:pt-28 md:pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+            {/* Sticky Navigation Subheader */}
+            <div className="sticky top-[var(--nav-height)] z-20 mb-8 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-3 bg-[#000000]/90 backdrop-blur-md border-y border-[#292d30] flex items-center justify-between gap-4">
                 <Link
-                    href="/work"
+                    href="/#projects"
                     className="inline-flex items-center gap-2 text-sm font-medium text-[#a1a4a5] hover:text-[#ffffff] transition-colors group"
                 >
                     <i className="ri-arrow-left-line text-sm transform transition-transform group-hover:-translate-x-1"></i>
-                    <span>Back to Portfolio</span>
+                    <span>Back to Projects</span>
                 </Link>
 
                 <div className="flex items-center gap-2">
-                    <a
-                        href={project.demoLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="resend-btn-ghost text-xs py-1.5 px-3"
-                    >
-                        <i className="ri-external-link-line text-xs"></i>
-                        <span className="hidden sm:inline">Live Demo</span>
-                    </a>
-                    {project.repoLink && (
+                    {project.demoLink && (
                         <a
-                            href={project.repoLink}
+                            href={project.demoLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="resend-btn-ghost text-xs py-1.5 px-3"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[#292d30] text-xs font-medium text-[#f0f0f0] hover:border-[#ffffff] transition-colors"
                         >
-                            <i className="ri-github-line text-xs"></i>
-                            <span className="hidden sm:inline">GitHub</span>
+                            <i className="ri-external-link-line text-xs"></i>
+                            <span className="hidden sm:inline">Live Demo</span>
                         </a>
                     )}
+                    <a
+                        href={project.repoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[#292d30] text-xs font-medium text-[#f0f0f0] hover:border-[#ffffff] transition-colors"
+                    >
+                        <i className="ri-github-fill text-xs"></i>
+                        <span>Source Code</span>
+                    </a>
                 </div>
             </div>
 
             {/* Case Study Header */}
             <section aria-label="Project Overview" className="mb-12">
-                {/* Category & Status */}
-                <div className="flex flex-wrap items-center gap-3 mb-4">
+                <div className="flex flex-wrap items-center gap-2.5 mb-4">
                     <span
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-medium border ${getCategoryBadgeStyles(
-                            project.category
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-xs border ${getStatusStyle(
+                            project.status
                         )}`}
                     >
                         <span className="w-1.5 h-1.5 rounded-full bg-current"></span>
-                        {project.category}
+                        {project.status}
                     </span>
-                    <span className="text-xs font-mono text-[#6e727a] uppercase tracking-wider">
-                        Flagship Case Study
-                    </span>
+                    <span className="text-xs text-[#6e727a]">•</span>
+                    <span className="text-xs text-[#a1a4a5]">{project.year}</span>
+                    <span className="text-xs text-[#6e727a]">•</span>
+                    <span className="text-xs text-[#a1a4a5]">{project.role}</span>
                 </div>
 
-                {/* Title */}
-                <h1 className="text-3xl sm:text-5xl font-bold font-outfit text-[#ffffff] tracking-[-0.03em] leading-[1.15] mb-6">
+                <h1 className="text-3xl sm:text-5xl font-bold font-outfit text-[#ffffff] tracking-tight leading-[1.15] mb-5">
                     {project.title}
                 </h1>
 
-                {/* Subtitle / Overview Description */}
-                <p className="text-lg sm:text-xl text-[#a1a4a5] leading-relaxed max-w-3xl mb-8">
+                <p className="text-lg sm:text-xl text-[#a1a4a5] leading-relaxed mb-8">
                     {project.description}
                 </p>
 
-                {/* Tech Stack Matrix Badges (6px radius, 1px #292d30 border) */}
+                {/* Tech Stack Chips */}
                 <div className="mb-8">
-                    <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a4a5] mb-3 flex items-center gap-2">
-                        <i className="ri-cpu-line text-[#9281f7]"></i> Core Architectural Stack
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[#6e727a] mb-2.5">
+                        Technologies Used
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
                         {project.tags.map((tag) => (
                             <span
                                 key={tag}
-                                className="resend-tag font-mono text-xs"
+                                className="px-2.5 py-1 rounded-md text-xs border border-[#292d30] text-[#a1a4a5] bg-[#000000]"
                             >
                                 {tag}
                             </span>
@@ -167,73 +157,94 @@ export default async function ProjectPage({ params }: PageProps) {
                     </div>
                 </div>
 
-                {/* Direct Action CTAs: 6px radius */}
+                {/* Direct Action Buttons */}
                 <div className="flex flex-wrap gap-3 pt-2">
                     <a
-                        href={project.demoLink}
+                        href={project.repoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="resend-btn-ghost text-sm px-5 py-2.5 hover:border-[#ffffff]"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#ffffff] text-[#000000] font-semibold text-sm hover:opacity-90 transition-opacity"
                     >
-                        <span>Launch Live Experience</span>
-                        <i className="ri-external-link-line text-sm"></i>
+                        <i className="ri-github-fill text-base"></i>
+                        <span>Inspect Repository on GitHub</span>
                     </a>
-                    {project.repoLink && (
+                    {project.demoLink && (
                         <a
-                            href={project.repoLink}
+                            href={project.demoLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="resend-btn-ghost text-sm px-5 py-2.5 text-[#9281f7] hover:border-[#9281f7]"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-[#292d30] text-[#f0f0f0] font-medium text-sm hover:border-[#ffffff] hover:bg-white/[0.03] transition-all"
                         >
-                            <i className="ri-github-fill text-sm"></i>
-                            <span>View Source Repository</span>
+                            <span>Open Live Demo</span>
+                            <i className="ri-external-link-line text-sm"></i>
                         </a>
                     )}
                 </div>
             </section>
 
-            {/* Visual Hero Showcase Banner: 16px radius, #0b0e14 bg, 1px #292d30 border, zero drop shadows */}
-            <div className="relative w-full h-[240px] sm:h-[300px] bg-[#0b0e14] rounded-2xl flex flex-col items-center justify-center mb-14 border border-[#292d30] overflow-hidden">
-                <div className="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#000000] border border-[#292d30] flex items-center justify-center">
-                    <i className={`${project.image} text-4xl sm:text-5xl text-[#9281f7]`}></i>
-                </div>
-                <div className="relative z-10 mt-5 text-center px-4">
-                    <p className="text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a4a5]">
-                        {project.category} • Production Blueprint
+            {/* Structured Evidence Summary Card */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12">
+                <div className="p-4 rounded-xl bg-[#0b0e14] border border-[#292d30]">
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[#6e727a] mb-1.5">
+                        The Problem
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#f0f0f0] leading-relaxed">
+                        {project.problem}
                     </p>
-                    <p className="text-sm font-medium text-[#f0f0f0] mt-1">
-                        System Architecture &amp; Technical Implementation Notes
+                </div>
+                <div className="p-4 rounded-xl bg-[#0b0e14] border border-[#292d30]">
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[#6e727a] mb-1.5">
+                        The Approach
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#f0f0f0] leading-relaxed">
+                        {project.approach}
+                    </p>
+                </div>
+                <div className="p-4 rounded-xl bg-[#000000] border border-[#292d30]">
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[#6e727a] mb-1.5">
+                        Key Decision
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#a1a4a5] leading-relaxed">
+                        {project.interestingDecision}
+                    </p>
+                </div>
+                <div className="p-4 rounded-xl bg-[#000000] border border-[#292d30]">
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[#6e727a] mb-1.5">
+                        Tradeoffs &amp; Constraints
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#a1a4a5] leading-relaxed">
+                        {project.tradeoffs}
                     </p>
                 </div>
             </div>
 
-            {/* Detailed Structured Case Study Body */}
+            {/* Detailed Case Study Notes */}
             <section className="case-study-content mb-16">
                 <div dangerouslySetInnerHTML={{ __html: project.content }} />
             </section>
 
-            {/* Project Navigation Footer: 16px radius, #000000 card bg, 1px #292d30 border */}
-            <nav className="border-t border-[#292d30] pt-10 mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Project Navigation Footer */}
+            <nav className="border-t border-[#292d30] pt-8 mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Link
                     href={`/work/${prevProject.slug}`}
-                    className="resend-card p-5 flex flex-col justify-between hover:border-[#9281f7] transition-colors"
+                    className="p-4 rounded-xl bg-[#000000] border border-[#292d30] flex flex-col justify-between hover:border-[#464a4d] transition-colors"
                 >
-                    <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a4a5] flex items-center gap-1.5">
-                        <i className="ri-arrow-left-s-line"></i> Previous Case Study
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[#6e727a] flex items-center gap-1.5">
+                        <i className="ri-arrow-left-s-line"></i> Previous Project
                     </span>
-                    <span className="text-base font-bold font-outfit text-[#ffffff] mt-2 tracking-tight">
+                    <span className="text-sm font-bold font-outfit text-[#ffffff] mt-2 tracking-tight">
                         {prevProject.title}
                     </span>
                 </Link>
 
                 <Link
                     href={`/work/${nextProject.slug}`}
-                    className="resend-card p-5 flex flex-col justify-between text-left sm:text-right hover:border-[#9281f7] transition-colors"
+                    className="p-4 rounded-xl bg-[#000000] border border-[#292d30] flex flex-col justify-between text-left sm:text-right hover:border-[#464a4d] transition-colors"
                 >
-                    <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a4a5] flex items-center justify-start sm:justify-end gap-1.5">
-                        Next Case Study <i className="ri-arrow-right-s-line"></i>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[#6e727a] flex items-center justify-start sm:justify-end gap-1.5">
+                        Next Project <i className="ri-arrow-right-s-line"></i>
                     </span>
-                    <span className="text-base font-bold font-outfit text-[#ffffff] mt-2 tracking-tight">
+                    <span className="text-sm font-bold font-outfit text-[#ffffff] mt-2 tracking-tight">
                         {nextProject.title}
                     </span>
                 </Link>

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "About | Pratik Kadole",
-    description: "Full-stack engineer building fast, responsive, and reliable web platforms and digital products.",
+    description: "About Pratik Kadole, software engineer based in India. Background, principles, and tools.",
 };
 
 export default function AboutPage() {

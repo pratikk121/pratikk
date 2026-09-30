@@ -2,8 +2,8 @@ import Contact from "@/components/Contact";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Contact & Collaborations | Pratik Kadole",
-    description: "Get in touch with Pratik Kadole for systems architecture, technical advisory, high-performance web platforms, and engineering opportunities.",
+    title: "Contact | Pratik Kadole",
+    description: "Get in touch with Pratik Kadole for software engineering roles, contract projects, or questions.",
 };
 
 export default function ContactPage() {

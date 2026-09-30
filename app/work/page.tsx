@@ -2,8 +2,8 @@ import SelectedWorks from "@/components/SelectedWorks";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Selected Works & Case Studies | Pratik Kadole",
-    description: "Explore flagship engineering projects, production distributed systems, ambient operating systems, and full-stack platforms by Pratik Kadole.",
+    title: "Selected Work | Pratik Kadole",
+    description: "Explore software projects, web applications, and developer tools built by Pratik Kadole.",
 };
 
 export default function WorkPage() {

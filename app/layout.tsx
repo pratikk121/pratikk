@@ -1,13 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
-import 'remixicon/fonts/remixicon.css'; // Import RemixIcon CSS globally
+import 'remixicon/fonts/remixicon.css';
 
-import SystemsCanvas from "@/components/SystemsCanvas";
 import Providers from "@/components/Providers";
 import CommandPalette from "@/components/CommandPalette";
-import LiveBlocksProvider from "@/components/LiveBlocksProvider";
-import LiveCursors from "@/components/LiveCursors";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -22,40 +19,26 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://pratikkadole.dev'),
+  metadataBase: new URL('https://pratikk.site'),
   title: {
-    default: 'Pratik Kadole | Systems & Full-Stack Engineer',
+    default: 'Pratik Kadole | Software Engineer',
     template: '%s | Pratik Kadole',
   },
-  description: 'Senior Systems & Full-Stack Engineer specializing in ambient web desktop environments, distributed architectures, high-performance web applications, and resilient cloud systems.',
+  description: 'Software engineer building practical web applications, developer tools, and systems. Portfolio, open source projects, and case studies.',
   applicationName: 'Pratik Kadole Portfolio',
-  authors: [{ name: 'Pratik Kadole', url: 'https://pratikkadole.dev' }],
+  authors: [{ name: 'Pratik Kadole', url: 'https://github.com/pratikk121' }],
   creator: 'Pratik Kadole',
   publisher: 'Pratik Kadole',
-  keywords: [
-    'Pratik Kadole',
-    'Systems Engineer',
-    'Full-Stack Engineer',
-    'Distributed Systems',
-    'AetherOS',
-    'Next.js 16',
-    'React 19',
-    'TypeScript',
-    'WebGL',
-    'Tailwind CSS',
-    'Software Architect',
-    'Frontend Lead',
-  ],
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://pratikkadole.dev',
-    siteName: 'Pratik Kadole | Systems & Full-Stack Engineer',
-    title: 'Pratik Kadole | Systems & Full-Stack Engineer',
-    description: 'Senior Systems & Full-Stack Engineer specializing in ambient web desktop environments, distributed architectures, high-performance web applications, and resilient cloud systems.',
+    url: 'https://pratikk.site',
+    siteName: 'Pratik Kadole',
+    title: 'Pratik Kadole | Software Engineer',
+    description: 'Software engineer building practical web applications, developer tools, and systems.',
     images: [
       {
         url: '/icon.png',
@@ -66,22 +49,14 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Pratik Kadole | Systems & Full-Stack Engineer',
-    description: 'Senior Systems & Full-Stack Engineer specializing in ambient web desktop environments, distributed architectures, high-performance web applications, and resilient cloud systems.',
-    creator: '@pratikkadole',
+    card: 'summary',
+    title: 'Pratik Kadole | Software Engineer',
+    description: 'Software engineer building practical web applications, developer tools, and systems.',
     images: ['/icon.png'],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
   icons: {
     icon: '/icon.png',
@@ -96,16 +71,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
-      <body>
-        <SystemsCanvas />
-
-        <LiveBlocksProvider>
-          <LiveCursors />
-          <CommandPalette />
-          <Navbar />
+      <body className="bg-[#000000] text-[#f0f0f0] antialiased min-h-screen flex flex-col selection:bg-[#9281f7]/30 selection:text-white">
+        <CommandPalette />
+        <Navbar />
+        <div className="flex-1">
           <Providers>{children}</Providers>
-          <Footer />
-        </LiveBlocksProvider>
+        </div>
+        <Footer />
       </body>
     </html>
   );
