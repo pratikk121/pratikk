@@ -9,7 +9,8 @@ type CategoryFilter = "All" | ProjectCategory;
 
 const CATEGORIES: CategoryFilter[] = [
   "All",
-  "Systems & OS",
+  "Systems & IoT",
+  "Scientific & Simulation",
   "Web Applications",
   "Developer Tools & SaaS",
 ];
@@ -25,6 +26,8 @@ export default function SelectedWorks() {
   const getStatusBadge = (status: ProjectStatus) => {
     switch (status) {
       case "Commercial":
+        return "text-[#22c55e] border-[#1e2329] bg-[#22c55e]/10";
+      case "Production Verified":
         return "text-[#22c55e] border-[#1e2329] bg-[#22c55e]/10";
       case "Active Project":
         return "text-[#3b82f6] border-[#1e2329] bg-[#3b82f6]/10";

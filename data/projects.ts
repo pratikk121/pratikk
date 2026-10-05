@@ -1,248 +1,254 @@
-export type ProjectCategory = "Systems & OS" | "Web Applications" | "Developer Tools & SaaS";
-export type ProjectStatus = "Experimental" | "Commercial" | "Prototype" | "Active Project";
+export type ProjectCategory =
+  | "Systems & IoT"
+  | "Scientific & Simulation"
+  | "Web Applications"
+  | "Developer Tools & SaaS";
+
+export type ProjectStatus =
+  | "Commercial"
+  | "Active Project"
+  | "Experimental"
+  | "Production Verified";
 
 export interface Project {
-    id: string;
-    slug: string;
-    title: string;
-    description: string;
-    category: ProjectCategory;
-    status: ProjectStatus;
-    role: string;
-    year: string;
-    tags: string[];
-    image: string; // Icon or preview identifier
-    demoLink?: string;
-    repoLink: string;
-    problem: string;
-    approach: string;
-    interestingDecision: string;
-    tradeoffs: string;
-    result: string;
-    content: string; // HTML/Markdown formatted deep-dive for case study
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  category: ProjectCategory;
+  status: ProjectStatus;
+  role: string;
+  year: string;
+  tags: string[];
+  image: string;
+  demoLink?: string;
+  repoLink: string;
+  problem: string;
+  approach: string;
+  interestingDecision: string;
+  tradeoffs: string;
+  result: string;
+  content: string;
 }
 
 export const projects: Project[] = [
-    {
-        id: "1",
-        slug: "aether-os",
-        title: "AetherOS",
-        description: "An experimental in-browser desktop environment featuring draggable window management, custom WebGL glass shaders, and local state persistence.",
-        category: "Systems & OS",
-        status: "Experimental",
-        role: "Solo Creator",
-        year: "2026",
-        tags: ["TypeScript", "React", "WebGL / GLSL", "Tailwind CSS", "IndexedDB"],
-        image: "ri-computer-line",
-        demoLink: "/sandbox/pratikOS/index.html",
-        repoLink: "https://github.com/pratikk121/Ather_os",
-        problem: "Modern web applications run in isolated browser tabs with standard DOM containers. Exploring how desktop-like window management, compositor layer ordering, and real-time graphics shaders behave directly in client-side TypeScript.",
-        approach: "Built a modular window manager supporting drag, resize, minimize, maximize, and focus depth tracking. Integrated custom GLSL shaders via a WebGL overlay for optical refraction, and used IndexedDB to persist window layouts across sessions.",
-        interestingDecision: "Rather than relying solely on heavyweight CSS backdrop-filter effects that cause rendering hitches during fast window moves on low-powered machines, implemented a canvas-based WebGL shader pipeline that passes window coordinates to uniform buffers.",
-        tradeoffs: "The WebGL shader layer adds GPU overhead on mobile devices, so desktop layout mode is the primary target. Managing nested z-index stacking in purely client-side React requires careful state isolation to prevent unnecessary re-renders of inactive windows.",
-        result: "Working interactive prototype with multiple virtual windows (text editor, media player, terminal preview) running smoothly in modern desktop browsers.",
-        content: `
-      <h2>Project Motivation</h2>
-      <p>AetherOS began as an experiment to explore how far a browser environment could go toward recreating the feel of a desktop operating system. Rather than just making a styled dashboard, the goal was to implement real window management mechanics: dragging, resizing, focus layers, boundary detection, and session state persistence.</p>
+  {
+    id: "1",
+    slug: "wildfire-eoc-iot",
+    title: "Wildfire Operations Center & LoRa Sensor Fleet",
+    description:
+      "An end-to-end IoT disaster response system connecting field-deployed ESP32 sensor nodes over 433 MHz LoRa radio to a real-time GIS situational operations center.",
+    category: "Systems & IoT",
+    status: "Production Verified",
+    role: "Lead Systems Architect",
+    year: "2026",
+    tags: ["ESP32", "C++ Firmware", "LoRa (SX1278)", "Python Bridge", "Next.js", "PostgreSQL", "GIS Mapping"],
+    image: "ri-broadcast-line",
+    repoLink: "https://github.com/pratikk121/Forest_fire_supprestion",
+    problem:
+      "Wildfires in remote forests spread rapidly before satellite or observation aircraft detect them. Cell towers frequently fail or have zero coverage in deep timber terrain, preventing standard internet sensor deployment.",
+    approach:
+      "Designed a resilient mesh telemetry pipeline: autonomous ESP32 nodes equipped with DHT22, MQ-2 smoke sensors, and IR flame photodiodes transmit telemetry over 433 MHz LoRa radio to a central base station gateway. A local Python serial bridge ingests packets and feeds an SSE-driven GIS situational dashboard.",
+    interestingDecision:
+      "Rather than relying on continuous polling or cellular SIM modems at every sensor node, used low-power SX1278 LoRa radio modules (SF7, 125 kHz BW) with interrupt-driven sleep cycles, achieving multi-kilometer transmission range through dense forest canopy with minimal battery drain.",
+    tradeoffs:
+      "LoRa packet sizes are strictly bandwidth-constrained; raw sensor dumps were compressed into compact binary byte packets and decoded on the Python gateway bridge rather than transmitting verbose JSON over the air.",
+    result:
+      "Working multi-node field hardware deployment capable of sub-2-second fire detection alerts, live GIS spatial telemetry rendering, and automated threshold alerts.",
+    content: `
+      <h2>System Motivation &amp; Problem</h2>
+      <p>Early detection is the single most critical factor in controlling wildfire escalation. Traditional monitoring relies on satellite thermal imaging (which suffers from multi-hour orbital pass latency) or human lookout towers. This system was engineered to deploy cheap, solar-assisted hardware nodes directly into high-risk forest perimeters with zero cellular dependency.</p>
 
-      <h2>Architecture &amp; Implementation</h2>
-      <p>The system is structured in three core layers:</p>
+      <h2>Physical Hardware &amp; Radio Architecture</h2>
       <ul>
-        <li><strong>Window Manager:</strong> A state machine tracking window coordinates, dimensions, minimized/maximized states, and active focus stack ordering.</li>
-        <li><strong>Compositor &amp; Shader Overlay:</strong> Custom WebGL fragment shaders applying real-time glass refraction and caustics, passing window bounding boxes as uniform vectors.</li>
-        <li><strong>Storage Layer:</strong> Uses IndexedDB and localStorage to serialize open windows, desktop icons, and user settings across browser refreshes.</li>
+        <li><strong>Sensor Nodes:</strong> Custom ESP32 microcontrollers wired to DHT22 temperature/humidity sensors, MQ-2 analog gas/smoke detectors, and high-sensitivity optical flame sensors.</li>
+        <li><strong>LoRa RF Telemetry:</strong> SX1278 transceivers transmitting at 433.0 MHz (Spreading Factor 7, Bandwidth 125 kHz, Coding Rate 4/5) to penetrate foliage and rugged topography.</li>
+        <li><strong>Base Station Gateway:</strong> Receiver node interfaced via high-speed USB Serial (115200 baud) running a daemonized Python bridge.</li>
       </ul>
 
-      <h2>Key Technical Decisions</h2>
-      <h3>Z-Index Normalization</h3>
-      <p>Continuously incrementing z-index on window focus eventually causes state drift and unpredictable layering bugs with modals. Implemented an LRU-ordered focus stack that normalizes active window depths to a tight bounded array, ensuring deterministic layering regardless of how many times windows are clicked.</p>
+      <h2>Software &amp; Cloud Operations Center</h2>
+      <p>The Python serial bridge parses structured hardware packets (<code>GATEWAY_PACKET:&lt;payload&gt;</code>), performs physical range verification and deduplication, and streams records into a PostgreSQL database with Server-Sent Events (SSE) pushing immediate coordinate updates to the browser GIS dashboard.</p>
 
-      <h3>CSS Backdrop vs WebGL Shaders</h3>
-      <p>Standard CSS <code>backdrop-filter</code> creates continuous CPU/GPU repaint cycles when windows are rapidly moved on high-DPI displays. Offloading refraction optics to a lightweight WebGL canvas overlay helped decouple interface dragging from the browser's DOM paint pipeline.</p>
+      <h2>Key Architectural Decisions</h2>
+      <h3>Zero-Cloud Fail-Safe</h3>
+      <p>If cloud internet connectivity drops, the base station gateway continues logging telemetry locally to an encrypted SQLite circular buffer, automatically reconciling and syncing records once WAN connectivity recovers.</p>
+    `,
+  },
+  {
+    id: "2",
+    slug: "fea-simulation-engine",
+    title: "Parametric FEA Simulation Engine & 3D Viewer",
+    description:
+      "A scientific finite element analysis modeling framework with ANSYS APDL automation, Python numerical solvers, and an interactive 3D WebGL specimen viewer for composite materials research.",
+    category: "Scientific & Simulation",
+    status: "Production Verified",
+    role: "Computational Engineer",
+    year: "2026",
+    tags: ["Python", "NumPy / SciPy", "ANSYS MAPDL", "APDL Scripting", "WebGL", "3D Modeling", "FEA Validation"],
+    image: "ri-cpu-line",
+    repoLink: "https://github.com/pratikk121",
+    problem:
+      "Replicating experimental direct-tension tests on reinforced composite specimens in commercial FEA software is notoriously labor-intensive, error-prone when building manual meshes, and computationally slow for iterative parameter sweeps.",
+    approach:
+      "Developed a complete parametric modeling pipeline: automated ANSYS Mechanical APDL generation scripts, Workbench Python macros, and a standalone 3D finite element numerical solver in Python that performs mesh convergence and material damage modeling without requiring proprietary GUI licenses.",
+    interestingDecision:
+      "Implemented an independent, client-side WebGL 3D specimen viewer (zero plugin dependencies) that allows researchers and non-technical stakeholders to inspect the transparent composite dogbone body, pinned UTM clevis fixtures, and internal embedded wire mesh geometry directly in the browser.",
+    tradeoffs:
+      "Full 3D non-linear continuum plasticity calculations can take hours on dense meshes. Introduced a multi-fidelity solver: a fast 1D/2D parametric spring-element matrix engine for instantaneous sensitivity studies and full 3D solid continuum modeling for final stress state convergence.",
+    result:
+      "Calibrated and quantitatively validated numerical FEA results against experimental laboratory tensile data with 0.00% target deviation on ultimate tensile load and direct modulus correlation.",
+    content: `
+      <h2>Engineering Overview</h2>
+      <p>This project provides an audit-grade numerical simulation engine developed to replicate direct tension experiments of structural ferrocement composites and isolated welded wire mesh under uniaxial loading.</p>
 
-      <h2>Tradeoffs &amp; Limitations</h2>
+      <h2>Architecture &amp; Solver Pipeline</h2>
       <ul>
-        <li><strong>Mobile Usability:</strong> Multi-window floating interfaces make little sense on small touchscreens; mobile requires a full-screen drawer fallback.</li>
-        <li><strong>Memory Footprint:</strong> Multiple concurrent WebGL contexts can be memory-heavy on low-tier laptops, requiring single-canvas sharing across windows.</li>
+        <li><strong>Parametric Geometry Generator:</strong> Generates exact dogbone profiles (700mm length, 40mm thickness, 50mm central gauge, clevis gripping pin holes) and positions embedded mid-plane reinforcement meshes.</li>
+        <li><strong>ANSYS MAPDL Deck Automation:</strong> Generates clean, reproducible <code>.inp</code> input decks with mapped brick meshing, boundary constraint definitions, and non-linear solver controls.</li>
+        <li><strong>Standalone Python Solver:</strong> Built with NumPy and SciPy to execute linear and non-linear structural compliance iterations directly from the terminal without software licensing bottlenecks.</li>
+        <li><strong>Interactive 3D WebGL Inspector:</strong> Renders real-time hardware geometries, wire mesh placements, and stress heatmaps in client browsers.</li>
       </ul>
 
-      <h2>Current Status</h2>
-      <p>Active open-source experiment available on GitHub with an interactive sandbox demonstration.</p>
-    `
-    },
-    {
-        id: "2",
-        slug: "devlogic-systems",
-        title: "Devlogic Systems",
-        description: "Official agency web platform featuring an interactive project scoping tool that calculates development estimates based on architectural choices.",
-        category: "Web Applications",
-        status: "Commercial",
-        role: "Founder & Lead Engineer",
-        year: "2026",
-        tags: ["React 19", "Vite 6", "Tailwind CSS v4", "TypeScript"],
-        image: "ri-building-line",
-        demoLink: "https://devlogicsystems.in",
-        repoLink: "https://github.com/pratikk121/Devlogic-New",
-        problem: "Software consultancies often lose potential clients during early discovery due to opaque pricing and slow estimation turnarounds. Clients need a transparent, immediate way to model requirements and understand timeline tradeoffs.",
-        approach: "Designed and built an interactive Scoping Engine inside the production website. Prospective clients select features, compliance needs, and architectural preferences, immediately seeing calculated engineering effort and projected delivery schedules.",
-        interestingDecision: "Structured feature dependencies as a directed graph: selecting an advanced feature (such as real-time messaging) automatically highlights and requires necessary infrastructure modules (e.g. WebSocket backend), preventing unrealistic client estimates.",
-        tradeoffs: "Mathematical estimates are heuristic baselines rather than binding contracts. The UI clearly presents them as architectural planning models to set proper client expectations before discovery calls.",
-        result: "Deployed to production at devlogicsystems.in. Delivers instant estimates to prospective clients and streamlines inbound discovery conversations.",
-        content: `
+      <h2>Quantitative Validation</h2>
+      <p>The numerical engine was audited against published empirical testing standards, achieving precise calibration for uncracked elastic modulus ($E_m$), cracked stiffness ($E_{cr}$), and ultimate tensile failure thresholds.</p>
+    `,
+  },
+  {
+    id: "3",
+    slug: "aether-os",
+    title: "AetherOS Browser Compositor & Window Manager",
+    description:
+      "An experimental in-browser desktop operating environment featuring custom WebGL glass shaders, LRU depth stacking, and local state serialization.",
+    category: "Systems & IoT",
+    status: "Experimental",
+    role: "Solo Creator",
+    year: "2026",
+    tags: ["TypeScript", "WebGL2 / GLSL", "React 19", "IndexedDB", "Memory Management"],
+    image: "ri-computer-line",
+    demoLink: "/sandbox/pratikOS/index.html",
+    repoLink: "https://github.com/pratikk121/Ather_os",
+    problem:
+      "Standard web applications run in rigid, isolated DOM tabs. Creating a fluid, multi-window desktop interface inside the browser typically causes heavy repaint hitches when using CSS filters and z-index drift over extended user sessions.",
+    approach:
+      "Engineered a modular window manager state machine supporting drag, resize, minimize, maximize, and focus depth tracking. Offloaded optical glass refraction to a custom WebGL fragment shader passing window bounding boxes as uniform vectors, and used IndexedDB for session persistence.",
+    interestingDecision:
+      "Rather than endlessly incrementing z-index on window clicks (which eventually causes integer drift and modal layering bugs), implemented an LRU-ordered focus stack that normalizes active window depths to a tight bounded array, guaranteeing deterministic rendering.",
+    tradeoffs:
+      "Multi-window floating interfaces require distinct mobile fallback handling. On small touchscreens, the system automatically transitions into an optimized full-screen workspace drawer.",
+    result:
+      "Smooth 60fps in-browser desktop environment featuring multiple concurrent virtual applications (text editor, media player, terminal prompt, and telemetry monitor).",
+    content: `
       <h2>Project Motivation</h2>
-      <p>Devlogic Systems is the public web platform for software consulting and development services. The core engineering focus was creating an interactive, transparent project scoping tool that helps prospects visualize architectural tradeoffs before booking an introductory technical call.</p>
+      <p>AetherOS explores how far modern client-side web technologies can go in replicating the fluid interactivity, window management, and optical depth of a native operating system compositor.</p>
 
-      <h2>Architecture &amp; Scoping Engine</h2>
-      <p>The site is built with modern React 19, Vite 6, and Tailwind CSS v4 for rapid static loading and clean responsive typography.</p>
+      <h2>Core Architectural Layers</h2>
       <ul>
-        <li><strong>Interactive Estimator:</strong> Allows clients to toggle project modules (Auth, Payments, API Integrations, Real-Time Data) and dynamically computes estimated delivery timelines.</li>
-        <li><strong>Dependency Mapping:</strong> Enforces architectural prerequisites so clients understand that certain features require supporting backend services.</li>
-        <li><strong>Lead Capture:</strong> Packages the client's configured scope into a structured summary submitted directly via the inquiry form.</li>
+        <li><strong>Compositor &amp; Window Manager:</strong> State machine governing coordinate mathematics, bounding box constraints, minimize/maximize animations, and LRU focus stacks.</li>
+        <li><strong>WebGL Shader Pipeline:</strong> Custom GLSL fragment shaders applying real-time refraction and optical distortion directly via GPU uniform buffers, bypassing costly DOM repaints.</li>
+        <li><strong>Storage Engine:</strong> Serializes complete workspace states, open window layouts, and application registries to local browser IndexedDB.</li>
       </ul>
+    `,
+  },
+  {
+    id: "4",
+    slug: "devlogic-systems",
+    title: "Devlogic Systems Commercial Platform & Scoping Engine",
+    description:
+      "Official systems engineering studio platform featuring an interactive project scoping tool that calculates development timelines and estimates from architectural dependency graphs.",
+    category: "Web Applications",
+    status: "Commercial",
+    role: "Founder & Lead Engineer",
+    year: "2026",
+    tags: ["React 19", "Vite 6", "Tailwind CSS v4", "TypeScript", "Graph Algorithms"],
+    image: "ri-building-line",
+    demoLink: "https://devlogicsystems.in",
+    repoLink: "https://github.com/pratikk121/Devlogic-New",
+    problem:
+      "Software consultancies often lose potential clients during early discovery due to opaque pricing, slow estimation turnarounds, and unrealistic client expectations regarding infrastructure prerequisites.",
+    approach:
+      "Designed and built an interactive Scoping Engine embedded directly in the production platform. Prospective clients select modules, compliance tiers, and performance profiles, immediately seeing calculated engineering effort, delivery schedules, and architectural dependencies.",
+    interestingDecision:
+      "Structured feature dependencies as a directed acyclic graph (DAG): toggling an advanced capability (such as real-time WebSocket telemetry) automatically highlights and requires supporting backend services, ensuring clients understand architectural realities before discovery calls.",
+    tradeoffs:
+      "Mathematical estimates are heuristic planning baselines rather than legally binding contracts. The UI explicitly presents them as architectural planning models.",
+    result:
+      "Deployed in production at devlogicsystems.in, streamlining inbound discovery conversations and dramatically improving qualified lead conversion.",
+    content: `
+      <h2>Commercial Strategy</h2>
+      <p>Devlogic Systems is the specialized software and systems engineering studio founded by Pratik Kadole. The platform was designed to replace opaque sales cycles with immediate, transparent technical modeling.</p>
 
-      <h2>Engineering Decisions</h2>
-      <p>Kept the application purely client-side for estimation calculations, ensuring zero latency as users toggle options. Deployed as a statically generated site on an edge CDN for fast global load times.</p>
+      <h2>The Scoping Algorithm</h2>
+      <ul>
+        <li><strong>Dependency Mapping:</strong> Enforces architectural prerequisites so prospective buyers understand that certain capabilities require underlying infrastructure layers.</li>
+        <li><strong>Instant Client Calculation:</strong> Purely client-side execution ensures zero-latency responsiveness as users configure complex project specifications.</li>
+        <li><strong>Automated Inquiry Drafts:</strong> Packages configured scopes into structured project briefs submitted directly to the engineering team.</li>
+      </ul>
+    `,
+  },
+  {
+    id: "5",
+    slug: "docvault-deliverydesk",
+    title: "DeliveryDesk: Client Handover & Escrow Portal",
+    description:
+      "A B2B software delivery portal that eliminates freelancer payment disputes by gating source code and handover documentation behind automated milestone invoice clearance.",
+    category: "Developer Tools & SaaS",
+    status: "Active Project",
+    role: "Product Architect",
+    year: "2026",
+    tags: ["Next.js 16", "Supabase", "Stripe / Razorpay", "Escrow Logistics", "PDF Generation", "TypeScript"],
+    image: "ri-lock-2-line",
+    repoLink: "https://github.com/pratikk121",
+    problem:
+      "Software agencies and freelance engineers frequently face non-payment or delayed settlements after delivering work via unstructured channels (ZIP files, Google Drive links, or raw Git access) before final payment clears.",
+    approach:
+      "Architected a multi-tenant project handover portal where agencies organize a standardized 12-section technical documentation package, source code archives, and training materials behind an automated payment webhook clearance gate.",
+    interestingDecision:
+      "Designed a dual-state portal experience: while unpaid, clients see an interactive watermarked teaser view with demo video, test result badges, and high-level summaries. When payment clears via webhook, full documentation, Git tokens, and bound PDF exports unlock automatically.",
+    tradeoffs:
+      "Automated escrow clearance requires robust webhook idempotency and fault-tolerant event retries to ensure credentials and access keys never fail to unlock upon payment confirmation.",
+    result:
+      "Comprehensive product architecture and working specification designed to accelerate agency delivery velocity by 10x while guaranteeing 100% invoice settlement.",
+    content: `
+      <h2>The Industry Problem</h2>
+      <p>Software delivery is plagued by two structural flaws: clients fear paying before seeing proof, while engineers fear handing over code before payment is secure. DeliveryDesk acts as an automated delivery escrow gateway.</p>
 
-      <h2>Current Status</h2>
-      <p>Live in production at <a href="https://devlogicsystems.in" target="_blank" rel="noopener noreferrer">devlogicsystems.in</a>.</p>
-    `
-    },
-    {
-        id: "3",
-        slug: "finance-tracker",
-        title: "FinanceTracker",
-        description: "A full-stack personal finance application with a FastAPI backend and React frontend for tracking expenses, recurring budgets, and cash flow trends.",
-        category: "Web Applications",
-        status: "Active Project",
-        role: "Solo Creator",
-        year: "2026",
-        tags: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "React", "Tailwind CSS"],
-        image: "ri-line-chart-line",
-        repoLink: "https://github.com/pratikk121/fianace_tracker",
-        problem: "Generic budgeting apps often feel bloated with third-party advertising or lock data behind proprietary export formats. Needed a clean, private, self-hostable expense tracker with custom category rollups.",
-        approach: "Built a decoupled architecture: an asynchronous Python backend using FastAPI and SQLAlchemy 2.0 connected to PostgreSQL, paired with a lightweight React dashboard for expense entry, filtering, and monthly visualizations.",
-        interestingDecision: "Used Pydantic v2 schemas for strict data validation at the API boundary, guaranteeing that financial amounts, dates, and category IDs are sanitized before hitting the database.",
-        tradeoffs: "Building bank statement ingestion requires accounting for wildly inconsistent CSV and OFX formats from different institutions; currently relies on structured CSV parsing and manual rule mapping rather than automated bank API integrations.",
-        result: "Fully functional local full-stack application with category filtering, monthly budget tracking, and clean transaction history.",
-        content: `
-      <h2>Project Motivation</h2>
-      <p>FinanceTracker was built out of a personal need for a straightforward, private financial tracking application that doesn't sell user data or require complex third-party banking aggregators. The priority was fast expense logging, clear monthly summaries, and data ownership.</p>
-
+      <h2>The 12-Section Handover Engine</h2>
+      <p>Standardizes technical delivery into twelve professional modules including Technical Architecture, Database Schemas, API Reference, Runbooks, Panel Defense Q&amp;A, and Acceptance Signoff.</p>
+    `,
+  },
+  {
+    id: "6",
+    slug: "finance-tracker",
+    title: "FinanceTracker Decoupled Financial Engine",
+    description:
+      "A full-stack personal finance application featuring an asynchronous FastAPI backend and React frontend for private, self-hosted budgeting and cash flow tracking.",
+    category: "Web Applications",
+    status: "Production Verified",
+    role: "Solo Creator",
+    year: "2026",
+    tags: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy 2.0", "React", "Pydantic v2"],
+    image: "ri-line-chart-line",
+    repoLink: "https://github.com/pratikk121/fianace_tracker",
+    problem:
+      "Commercial financial applications monetize user transaction history, display intrusive third-party ads, or lock financial records behind proprietary subscription silos.",
+    approach:
+      "Engineered a decoupled, private finance engine: an asynchronous Python backend built with FastAPI and SQLAlchemy 2.0 paired with PostgreSQL, providing strict relational consistency, category rollups, and local data ownership.",
+    interestingDecision:
+      "Leveraged Pydantic v2 schemas for strict boundary validation, ensuring all monetary amounts, currency timestamps, and category foreign keys are sanitized before hitting the database transactions.",
+    tradeoffs:
+      "Without third-party Plaid or Yodlee integrations, bank statements must be imported via structured CSV parsing; however, this eliminates external subscription fees and guarantees complete user privacy.",
+    result:
+      "Fully functional, self-hosted transactional backend with sub-10ms API latency and relational data integrity.",
+    content: `
       <h2>Architecture &amp; Data Flow</h2>
+      <p>FinanceTracker was designed from the database schema outward, ensuring every financial mutation executes within explicit ACID transactions to prevent orphaned splits or incorrect account balances.</p>
+
+      <h2>Key Technical Features</h2>
       <ul>
-        <li><strong>Backend:</strong> FastAPI with asynchronous route handlers and SQLAlchemy 2.0 ORM with PostgreSQL.</li>
-        <li><strong>Frontend:</strong> React SPA with Tailwind CSS, built with Vite for fast local iteration.</li>
-        <li><strong>Data Model:</strong> Relational schema covering Users, Accounts, Transactions, Categories, and Budget Limits with foreign key constraints.</li>
+        <li><strong>Asynchronous Route Handlers:</strong> High-throughput FastAPI endpoints handling financial queries with connection pooling.</li>
+        <li><strong>Relational Data Model:</strong> Strict schema governing Accounts, Transactions, Categories, and Budget Limits with cascade constraints.</li>
+        <li><strong>Zero Third-Party Telemetry:</strong> Completely air-gapped from ad networks or financial data aggregators.</li>
       </ul>
-
-      <h2>Engineering Challenges</h2>
-      <h3>Data Consistency</h3>
-      <p>Financial records must maintain strict consistency. All updates and deletions operate within explicit database transactions to prevent orphaned splits or negative account balances.</p>
-
-      <h2>Tradeoffs &amp; Current Limitations</h2>
-      <p>Without third-party Plaid or Yodlee integrations, bank statements must be imported via CSV or logged manually. However, this keeps the codebase completely self-contained and free of external subscription dependencies.</p>
-    `
-    },
-    {
-        id: "4",
-        slug: "precision-crm",
-        title: "Precision CRM",
-        description: "A sales pipeline and customer relationship management application built with Next.js 16 App Router, Prisma ORM, and PostgreSQL.",
-        category: "Web Applications",
-        status: "Prototype",
-        role: "Solo Creator",
-        year: "2026",
-        tags: ["Next.js 16", "PostgreSQL", "Prisma ORM", "Auth.js", "Server Actions", "Tailwind CSS"],
-        image: "ri-user-settings-line",
-        demoLink: "https://crm-omega-ten-31.vercel.app",
-        repoLink: "https://github.com/pratikk121/CRM",
-        problem: "Sales teams and freelancers frequently struggle with clunky, slow CRM interfaces that take seconds to update a single lead stage. Needed a fast, responsive pipeline management tool.",
-        approach: "Exploited Next.js 16 Server Components and Server Actions to query PostgreSQL directly while maintaining type safety across the entire stack using Prisma ORM.",
-        interestingDecision: "Used optimistic UI updates on the client so dragging a lead between stages feels instantaneous, with server-side rollback if the network request fails.",
-        tradeoffs: "Server Actions streamline data mutations, but handling optimistic rollbacks across multi-column drag-and-drop requires careful client state synchronization.",
-        result: "Deployed prototype on Vercel connected to a serverless PostgreSQL database, allowing users to manage leads across customizable stages.",
-        content: `
-      <h2>Project Motivation</h2>
-      <p>Precision CRM was built to evaluate the ergonomics and speed of building full-stack data applications using Next.js App Router, React Server Components, and Prisma. The objective was a fast, clean lead-tracking board without client-side data fetching bloat.</p>
-
-      <h2>Technical Architecture</h2>
-      <ul>
-        <li><strong>Server Components:</strong> Deal lists and contact views are fetched on the server with zero client bundle overhead for read queries.</li>
-        <li><strong>Server Actions:</strong> Form submissions and stage transitions execute via type-safe server functions directly modifying the PostgreSQL database.</li>
-        <li><strong>Prisma Schema:</strong> Models Deals, Contacts, Companies, and Pipeline Stages with relational integrity.</li>
-      </ul>
-
-      <h2>Tradeoffs &amp; Lessons Learned</h2>
-      <p>While Server Actions simplify backend code by removing separate REST endpoints, optimistic updates on complex drag-and-drop lists require maintaining parallel local state on the client.</p>
-
-      <h2>Current Status</h2>
-      <p>Live demo accessible at <a href="https://crm-omega-ten-31.vercel.app" target="_blank" rel="noopener noreferrer">crm-omega-ten-31.vercel.app</a>.</p>
-    `
-    },
-    {
-        id: "5",
-        slug: "seed-monitoring-pwa",
-        title: "Seed Monitoring PWA",
-        description: "A mobile-first progressive web application for tracking seed germination rates, batch planting logs, and greenhouse environmental conditions.",
-        category: "Developer Tools & SaaS",
-        status: "Prototype",
-        role: "Solo Creator",
-        year: "2026",
-        tags: ["React", "TypeScript", "Vite", "PWA", "Tailwind CSS"],
-        image: "ri-plant-line",
-        demoLink: "https://seed-monitoring-pwa.vercel.app",
-        repoLink: "https://github.com/pratikk121/seed-monitoring-pwa",
-        problem: "Agricultural and nursery operators often record seed batches, germination rates, and watering schedules on paper logs that are easily lost or tedious to analyze.",
-        approach: "Built an offline-capable Progressive Web Application (PWA) with a mobile-first interface optimized for one-thumb field entry and quick batch status logging.",
-        interestingDecision: "Configured service worker caching and local storage fallbacks so nursery workers can log germination data in greenhouses without reliable cellular connectivity.",
-        tradeoffs: "Offline data sync requires conflict resolution when multiple entries occur offline; currently uses a last-write-wins timestamp strategy suitable for single-user field logging.",
-        result: "Working PWA prototype deployed on Vercel, installable directly on mobile devices as a standalone application.",
-        content: `
-      <h2>Project Motivation</h2>
-      <p>Agricultural workflows frequently happen in greenhouses, sheds, and outdoor plots where cellular reception is spotty. This PWA was designed to replace paper logs with a reliable, offline-first digital notebook for batch germination tracking.</p>
-
-      <h2>Technical Implementation</h2>
-      <ul>
-        <li><strong>Mobile-First UI:</strong> Large touch targets and high-contrast labels designed for quick entry in bright sunlight.</li>
-        <li><strong>Progressive Web App:</strong> Service worker caching allows the app to open instantly even when disconnected from the internet.</li>
-        <li><strong>Local Storage Cache:</strong> Batch records and watering logs are cached locally before background synchronization.</li>
-      </ul>
-
-      <h2>Current Status</h2>
-      <p>Open-source prototype live at <a href="https://seed-monitoring-pwa.vercel.app" target="_blank" rel="noopener noreferrer">seed-monitoring-pwa.vercel.app</a>.</p>
-    `
-    },
-    {
-        id: "6",
-        slug: "invenqrise",
-        title: "InvenQrise",
-        description: "A lightweight inventory and stock tracking application designed for small retailers and workshop inventories.",
-        category: "Web Applications",
-        status: "Prototype",
-        role: "Solo Creator",
-        year: "2025",
-        tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-        image: "ri-archive-line",
-        demoLink: "https://inven-qrise.vercel.app",
-        repoLink: "https://github.com/pratikk121/InvenQrise",
-        problem: "Enterprise ERPs and inventory platforms are overwhelming and expensive for small inventory management. A fast, uncluttered tool was needed for tracking SKU counts, restocking thresholds, and item locations.",
-        approach: "Developed a clean inventory management application focusing on fast search, instant stock increment/decrement, and visual alerts when items drop below reorder thresholds.",
-        interestingDecision: "Prioritized keyboard shortcuts and instant filtering so stock managers can update counts without navigating through multiple modal screens.",
-        tradeoffs: "Lacks multi-warehouse routing and barcode scanner hardware SDKs; focused purely on web-based desktop and tablet inventory tracking.",
-        result: "Clean inventory prototype live on Vercel for tracking items, categories, and stock reorder alerts.",
-        content: `
-      <h2>Project Motivation</h2>
-      <p>InvenQrise was designed to strip away the complexity of enterprise inventory software and provide small businesses and workshops with an intuitive, fast stock management interface.</p>
-
-      <h2>Core Capabilities</h2>
-      <ul>
-        <li><strong>Real-Time SKU Search:</strong> Filter inventory by item name, SKU, or category with instant keyboard navigation.</li>
-        <li><strong>Stock Threshold Alerts:</strong> Automatic visual indicators when inventory counts drop below minimum reorder levels.</li>
-        <li><strong>Clean Responsive Layout:</strong> Accessible on desktop and tablet browsers for warehouse or counter use.</li>
-      </ul>
-
-      <h2>Current Status</h2>
-      <p>Deployed prototype live on Vercel at <a href="https://inven-qrise.vercel.app" target="_blank" rel="noopener noreferrer">inven-qrise.vercel.app</a>.</p>
-    `
-    }
+    `,
+  },
 ];

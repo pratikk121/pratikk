@@ -103,28 +103,28 @@ export default function Hero() {
             <div className="space-y-3.5 text-sm">
               <div className="p-3.5 rounded-lg border border-[#1e2329] bg-[#050505]/70 hover:border-[#38414a] transition-colors">
                 <div className="text-xs font-semibold text-[#f0f2f5] mb-1">
-                  Full-Stack Applications
+                  IoT &amp; Hardware Telemetry
                 </div>
                 <p className="text-xs text-[#889096] leading-relaxed">
-                  Building reactive interfaces and API backends using Next.js 16, React, Python, and FastAPI.
+                  Building field-grade sensor fleets with ESP32 firmware, 433 MHz LoRa radio meshes, and real-time GIS operations.
                 </p>
               </div>
 
               <div className="p-3.5 rounded-lg border border-[#1e2329] bg-[#050505]/70 hover:border-[#38414a] transition-colors">
                 <div className="text-xs font-semibold text-[#f0f2f5] mb-1">
-                  Browser Systems &amp; Window Managers
+                  Computational Simulation &amp; Systems
                 </div>
                 <p className="text-xs text-[#889096] leading-relaxed">
-                  Experimenting with in-browser window layering, WebGL shader compositing, and state serialization in AetherOS.
+                  Parametric FEA modeling with ANSYS APDL automation, Python numerical solvers, and WebGL browser compositors.
                 </p>
               </div>
 
               <div className="p-3.5 rounded-lg border border-[#1e2329] bg-[#050505]/70 hover:border-[#38414a] transition-colors">
                 <div className="text-xs font-semibold text-[#f0f2f5] mb-1">
-                  Public Code on GitHub
+                  Turnkey Product Architecture
                 </div>
                 <p className="text-xs text-[#889096] leading-relaxed">
-                  All personal work, experiments, and prototypes are maintained in public repositories with reproducible setups.
+                  Engineering high-performance client platforms, interactive scoping engines, and automated escrow delivery systems.
                 </p>
               </div>
             </div>
