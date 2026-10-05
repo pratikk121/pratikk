@@ -16,7 +16,27 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Pratik Kadole · Systems & Full-Stack Engineer",
-  description: "Software engineer building practical software, developer tools, and systems.",
+  description:
+    "Software engineer building practical software, developer tools, and systems. Specializing in reactive interfaces, browser engines, and backend architecture.",
+  metadataBase: new URL("https://pratikk.site"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Pratik Kadole · Systems & Full-Stack Engineer",
+    description:
+      "Software engineer building practical software, developer tools, and systems.",
+    url: "https://pratikk.site",
+    siteName: "Pratik Kadole",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pratik Kadole · Systems & Full-Stack Engineer",
+    description:
+      "Software engineer building practical software, developer tools, and systems.",
+  },
 };
 
 export default function RootLayout({

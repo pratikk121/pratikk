@@ -51,7 +51,7 @@ export default function Contact() {
             Contact
           </h2>
           <p className="text-[#889096] max-w-xl text-sm sm:text-base mt-2 leading-relaxed">
-            I am available for full-time engineering roles, contract projects, and systems collaboration. Reach out directly or submit the inquiry form below.
+            I am available for contract projects, architectural consulting, and selective technical collaborations. Reach out directly or submit the inquiry form below.
           </p>
         </div>
 
@@ -153,7 +153,7 @@ export default function Contact() {
                   name="message"
                   rows={4}
                   required
-                  placeholder="Tell me about your project, timeline, or engineering role..."
+                  placeholder="Tell me about your project, scope, or technical consulting needs..."
                   className="w-full px-3.5 py-2.5 rounded-lg border border-[#1e2329] bg-[#050505] text-sm text-[#f0f2f5] placeholder-[#555d65] focus:outline-none focus:border-[#38414a] transition-colors resize-none"
                 />
               </div>

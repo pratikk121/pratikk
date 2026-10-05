@@ -22,7 +22,7 @@ export default function Hero() {
           <div className="flex items-center gap-2 mb-6">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-[#1e2329] text-xs text-[#889096] bg-[#0c0e12]">
               <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
-              <span>Available for software engineering roles &amp; contracts</span>
+              <span>Available for selective contracts &amp; consulting</span>
             </span>
           </div>
 
