@@ -47,7 +47,7 @@ export default function SelectedWorks() {
             <span>Verified Implementations</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#f0f2f5]">
-            Selected Work
+            What I&apos;ve Built
           </h2>
           <p className="text-[#889096] text-sm sm:text-base mt-2 max-w-xl">
             Projects, prototypes, and open source systems. Every item links to real code and demonstrates a specific set of architectural decisions.

@@ -25,7 +25,7 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "Work", href: "#projects" },
+    { label: "What I've Built", href: "#projects" },
     { label: "Systems Lab", href: "#systems-lab" },
     { label: "About", href: "#about" },
   ];

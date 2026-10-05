@@ -78,7 +78,7 @@ export default function CommandPalette({ isOpen, onClose }: CommandPaletteProps)
     const navItems: CommandItem[] = [
       {
         id: "nav-work",
-        title: "Selected Work",
+        title: "What I've Built",
         category: "Navigation",
         description: "Browse featured systems and web applications",
         icon: <Code size={16} className="text-[#3b82f6]" weight="duotone" />,

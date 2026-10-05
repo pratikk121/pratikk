@@ -46,7 +46,7 @@ export default function Hero() {
               href="#projects"
               className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-md bg-[#ffffff] text-[#050505] font-semibold text-sm hover:opacity-90 active:scale-[0.98] transition-all whitespace-nowrap"
             >
-              <span>Selected Work</span>
+              <span>What I&apos;ve Built</span>
               <ArrowDown size={14} weight="bold" />
             </Link>
 
