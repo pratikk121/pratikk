@@ -1,7 +1,17 @@
+import Hero from "@/components/Hero";
+import SelectedWorks from "@/components/SelectedWorks";
+import SystemsLab from "@/components/SystemsLab";
+import About from "@/components/About";
+import Contact from "@/components/Contact";
+
 export default function Home() {
   return (
-    <main>
-      <div>Hello world!</div>
-    </main>
+    <>
+      <Hero />
+      <SelectedWorks />
+      <SystemsLab />
+      <About />
+      <Contact />
+    </>
   );
 }
